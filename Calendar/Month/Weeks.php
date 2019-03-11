@@ -38,6 +38,10 @@
  */
 namespace Pear\Calendar\Month;
 
+use Pear\Calendar\Month;
+use Pear\Calendar\Table\Helper;
+use Pear\Calendar\Week;
+
 /**
  * Allows Calendar include path to be redefined
  * @ignore
@@ -76,7 +80,7 @@ require_once CALENDAR_ROOT.'Month.php';
  * @link      http://pear.php.net/package/Calendar
  * @access    public
  */
-class Calendar_Month_Weeks extends Calendar_Month
+class Weeks extends Month
 {
     /**
      * Instance of Calendar_Table_Helper
@@ -117,8 +121,7 @@ class Calendar_Month_Weeks extends Calendar_Month
      */
     function build($sDates = array())
     {
-        include_once CALENDAR_ROOT.'Table/Helper.php';
-        $this->tableHelper = new Calendar_Table_Helper($this, $this->firstDay);
+        $this->tableHelper = new Helper($this, $this->firstDay);
         include_once CALENDAR_ROOT.'Week.php';
         $numWeeks = $this->tableHelper->getNumWeeks();
         for ($i=1, $d=1; $i<=$numWeeks; $i++,
@@ -128,7 +131,7 @@ class Calendar_Month_Weeks extends Calendar_Month
                 $this->thisDay()
             )
         ) {
-            $this->children[$i] = new Calendar_Week(
+            $this->children[$i] = new Week(
                 $this->year, $this->month, $d, $this->tableHelper->getFirstDay());
         }
         //used to set empty days
