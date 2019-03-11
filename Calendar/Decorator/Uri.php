@@ -38,23 +38,7 @@
  */
 namespace Pear\Calendar\Decorator;
 
-/**
- * Allows Calendar include path to be redefined
- * @ignore
- */
-if (!defined('CALENDAR_ROOT')) {
-    define('CALENDAR_ROOT', 'Calendar'.DIRECTORY_SEPARATOR);
-}
-
-/**
- * Load Calendar decorator base class
- */
-require_once CALENDAR_ROOT.'Decorator.php';
-
-/**
- * Load the Uri utility
- */
-require_once CALENDAR_ROOT.'Util'.DIRECTORY_SEPARATOR.'Uri.php';
+use Pear\Calendar\Decorator;
 
 /**
  * Decorator to help with building HTML links for navigating the calendar<br />
@@ -77,7 +61,7 @@ require_once CALENDAR_ROOT.'Util'.DIRECTORY_SEPARATOR.'Uri.php';
  * @see       Calendar_Util_Uri
  * @access    public
  */
-class Calendar_Decorator_Uri extends Calendar_Decorator
+class Calendar_Decorator_Uri extends Decorator
 {
 
     /**

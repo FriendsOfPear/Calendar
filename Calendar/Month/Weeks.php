@@ -43,24 +43,6 @@ use Pear\Calendar\Table\Helper;
 use Pear\Calendar\Week;
 
 /**
- * Allows Calendar include path to be redefined
- * @ignore
- */
-if (!defined('CALENDAR_ROOT')) {
-    define('CALENDAR_ROOT', 'Calendar'.DIRECTORY_SEPARATOR);
-}
-
-/**
- * Load Calendar base class
- */
-require_once CALENDAR_ROOT.'Calendar.php';
-
-/**
- * Load base month
- */
-require_once CALENDAR_ROOT.'Month.php';
-
-/**
  * Represents a Month and builds Weeks
  * <code>
  * require_once 'Calendar'.DIRECTORY_SEPARATOR.'Month'.DIRECTORY_SEPARATOR.'Weeks.php';

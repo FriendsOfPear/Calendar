@@ -41,24 +41,6 @@ namespace Pear\Calendar\Decorator;
 use Pear\Calendar\Decorator;
 
 /**
- * Allows Calendar include path to be redefined
- * @ignore
- */
-if (!defined('CALENDAR_ROOT')) {
-    define('CALENDAR_ROOT', 'Calendar'.DIRECTORY_SEPARATOR);
-}
-
-/**
- * Load Calendar decorator base class
- */
-require_once CALENDAR_ROOT.'Decorator.php';
-
-/**
- * Load the Uri utility
- */
-require_once CALENDAR_ROOT.'Util'.DIRECTORY_SEPARATOR.'Textual.php';
-
-/**
  * Decorator to help with fetching textual representations of months and
  * days of the week.
  * <b>Note:</b> for performance you should prefer Calendar_Util_Textual unless you

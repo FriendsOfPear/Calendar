@@ -38,23 +38,8 @@
  */
 namespace Pear\Calendar\Decorator;
 
-/**
- * Allows Calendar include path to be redefined
- * @ignore
- */
-if (!defined('CALENDAR_ROOT')) {
-    define('CALENDAR_ROOT', 'Calendar'.DIRECTORY_SEPARATOR);
-}
+use Pear\Calendar\Decorator;
 
-/**
- * Load Calendar decorator base class
- */
-require_once CALENDAR_ROOT.'Decorator.php';
-
-/**
- * Load a Calendar_Day
- */
-require_once CALENDAR_ROOT.'Day.php';
 /**
  * Decorator for fetching the day of the week
  * <code>
@@ -73,7 +58,7 @@ require_once CALENDAR_ROOT.'Day.php';
  * @link      http://pear.php.net/package/Calendar
  * @access    public
  */
-class Calendar_Decorator_Weekday extends Calendar_Decorator
+class Weekday extends Decorator
 {
     /**
      * First day of week

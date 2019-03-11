@@ -41,19 +41,6 @@ namespace Pear\Calendar;
 use Pear\Calendar\Table\Helper;
 
 /**
- * Allows Calendar include path to be redefined
- * @ignore
- */
-if (!defined('CALENDAR_ROOT')) {
-    define('CALENDAR_ROOT', 'Calendar'.DIRECTORY_SEPARATOR);
-}
-
-/**
- * Load Calendar base class
- */
-require_once CALENDAR_ROOT.'Calendar.php';
-
-/**
  * Represents a Week and builds Days in tabular format<br>
  * <code>
  * require_once 'Calendar/Week.php';

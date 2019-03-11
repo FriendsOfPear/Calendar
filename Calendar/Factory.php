@@ -39,19 +39,6 @@
 namespace Pear\Calendar;
 
 /**
- * Allows Calendar include path to be redefined
- * @ignore
- */
-if (!defined('CALENDAR_ROOT')) {
-    define('CALENDAR_ROOT', 'Calendar'.DIRECTORY_SEPARATOR);
-}
-
-/**
- * Load Calendar base class
- */
-require_once CALENDAR_ROOT.'Calendar.php';
-
-/**
  * Contains a factory method to return a Singleton instance of a class
  * implementing the Calendar_Engine_Interface.<br>
  * For Month objects, to control type of month returned, use CALENDAR_MONTH_STATE

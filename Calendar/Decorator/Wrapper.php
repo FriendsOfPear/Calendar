@@ -38,18 +38,7 @@
  */
 namespace Pear\Calendar\Decorator;
 
-/**
- * Allows Calendar include path to be redefined
- * @ignore
- */
-if (!defined('CALENDAR_ROOT')) {
-    define('CALENDAR_ROOT', 'Calendar'.DIRECTORY_SEPARATOR);
-}
-
-/**
- * Load Calendar decorator base class
- */
-require_once CALENDAR_ROOT.'Decorator.php';
+use Pear\Calendar\Decorator;
 
 /**
  * Decorator to help with wrapping built children in another decorator
@@ -63,7 +52,7 @@ require_once CALENDAR_ROOT.'Decorator.php';
  * @link      http://pear.php.net/package/Calendar
  * @access    public
  */
-class Calendar_Decorator_Wrapper extends Calendar_Decorator
+class Wrapper extends Decorator
 {
     /**
      * Constructs Calendar_Decorator_Wrapper
