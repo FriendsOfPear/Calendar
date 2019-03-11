@@ -61,7 +61,7 @@ on lunar cycles).
       <file name="Wrapper.php" role="php" />
      </dir> <!-- /Decorator -->
      <dir name="Engine">
-      <file name="Interface.php" role="php" />
+      <file name="CalendarEngineInterface.php" role="php" />
       <file name="PearDate.php" role="php" />
       <file name="UnixTS.php" role="php" />
      </dir> <!-- /Engine -->
