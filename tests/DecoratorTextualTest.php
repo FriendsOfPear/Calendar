@@ -2,6 +2,8 @@
 
 namespace Pear\Calendar\Test;
 
+use Pear\Calendar\Decorator\Textual;
+
 require_once 'PEAR/Registry.php';
 require_once 'MockCalendarTestCase.php';
 
