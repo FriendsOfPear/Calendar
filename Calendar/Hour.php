@@ -69,7 +69,7 @@ require_once CALENDAR_ROOT.'Calendar.php';
  * @link      http://pear.php.net/package/Calendar
  * @access    public
  */
-class Calendar_Hour extends Calendar
+class Hour extends Calendar
 {
     /**
      * Constructs Calendar_Hour

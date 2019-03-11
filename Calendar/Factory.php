@@ -98,7 +98,7 @@ class Calendar_Factory
         switch ($type) {
         case 'Day':
             include_once CALENDAR_ROOT.'Day.php';
-            return new Calendar_Day($y, $m, $d);
+            return new Day($y, $m, $d);
         case 'Month':
             // Set default state for which month type to build
             if (!defined('CALENDAR_MONTH_STATE')) {
@@ -125,7 +125,7 @@ class Calendar_Factory
             return new Calendar_Week($y, $m, $d, $firstDay);
         case 'Hour':
             include_once CALENDAR_ROOT.'Hour.php';
-            return new Calendar_Hour($y, $m, $d, $h);
+            return new Hour($y, $m, $d, $h);
         case 'Minute':
             include_once CALENDAR_ROOT.'Minute.php';
             return new Calendar_Minute($y, $m, $d, $h, $i);

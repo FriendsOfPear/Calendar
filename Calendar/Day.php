@@ -68,7 +68,7 @@ require_once CALENDAR_ROOT.'Calendar.php';
  * @link      http://pear.php.net/package/Calendar
  * @access    public
  */
-class Calendar_Day extends Calendar
+class Day extends Calendar
 {
     /**
      * Marks the Day at the beginning of a week
@@ -121,7 +121,7 @@ class Calendar_Day extends Calendar
         $hID = $this->cE->getHoursInDay($this->year, $this->month, $this->day);
         for ($i=0; $i < $hID; $i++) {
             $this->children[$i] =
-                new Calendar_Hour($this->year, $this->month, $this->day, $i);
+                new Hour($this->year, $this->month, $this->day, $i);
         }
         if (count($sDates) > 0) {
             $this->setSelection($sDates);

@@ -2,12 +2,14 @@
 
 namespace Pear\Calendar\Test;
 
+use Pear\Calendar\Day;
+use Pear\Calendar\Hour;
 use PHPUnit_Framework_TestCase;
 
 class DayTest extends PHPUnit_Framework_TestCase
 {
     function setUp() {
-        $this->cal = new Calendar_Day(2003,10,25);
+        $this->cal = new Day(2003,10,25);
     }
     function testPrevDay_Array () {
         $this->assertEquals(
@@ -74,8 +76,7 @@ class DayTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($children,$this->cal->fetchAll());
     }
     function testSelection() {
-        require_once(CALENDAR_ROOT . 'Hour.php');
-        $selection = array(new Calendar_Hour(2003,10,25,13));
+        $selection = array(new Hour(2003,10,25,13));
         $this->cal->build($selection);
         $i = 0;
         while ( $Child = $this->cal->fetch() ) {

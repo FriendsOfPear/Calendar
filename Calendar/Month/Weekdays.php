@@ -123,7 +123,7 @@ class Calendar_Month_Weekdays extends Calendar_Month
      *
      * @return boolean
      * @access public
-     * @see Calendar_Day::isEmpty()
+     * @see Day::isEmpty()
      * @see Calendar_Day_Base::isFirst()
      * @see Calendar_Day_Base::isLast()
      */

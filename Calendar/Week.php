@@ -224,7 +224,7 @@ class Calendar_Week extends Calendar
 
         for ($i=1; $i <= $end; $i++) {
             $stamp = $this->cE->dateToStamp($year, $month, $day++);
-            $this->children[$i] = new Calendar_Day(
+            $this->children[$i] = new Day(
                 $this->cE->stampToYear($stamp),
                 $this->cE->stampToMonth($stamp),
                 $this->cE->stampToDay($stamp)
