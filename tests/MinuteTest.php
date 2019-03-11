@@ -2,12 +2,14 @@
 
 namespace Pear\Calendar\Test;
 
+use Pear\Calendar\Minute;
+use Pear\Calendar\Second;
 use PHPUnit_Framework_TestCase;
 
 class MinuteTest extends PHPUnit_Framework_TestCase
 {
     function setUp() {
-        $this->cal = new Calendar_Minute(2003,10,25,13,32);
+        $this->cal = new Minute(2003,10,25,13,32);
     }
     function testPrevDay_Array () {
         $this->assertEquals(
@@ -66,8 +68,7 @@ class MinuteTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($children,$this->cal->fetchAll());
     }
     function testSelection() {
-        require_once(CALENDAR_ROOT . 'Second.php');
-        $selection = array(new Calendar_Second(2003,10,25,13,32,43));
+        $selection = array(new Second(2003,10,25,13,32,43));
         $this->cal->build($selection);
         $i = 0;
         while ( $Child = $this->cal->fetch() ) {
