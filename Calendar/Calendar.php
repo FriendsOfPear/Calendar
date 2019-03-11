@@ -93,7 +93,7 @@ class Calendar_Engine_Factory
             break;
         case 'UnixTS':
         default:
-            $class = 'Calendar_Engine_UnixTS';
+            $class = 'Pear\Calendar\Engine\UnixTS';
             break;
         }
         if (!$engine) {
