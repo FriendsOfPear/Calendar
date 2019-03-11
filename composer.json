@@ -17,8 +17,13 @@
         }
     ],
     "autoload": {
-        "psr-0": {
-            "Calendar": "./"
+        "psr-4": {
+            "Pear\\Calendar\\": "Calendar/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Pear\\Calendar\\Test": "tests/"
         }
     },
     "description": "More info available on: http://pear.php.net/package/Calendar",
