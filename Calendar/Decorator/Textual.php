@@ -38,6 +38,8 @@
  */
 namespace Pear\Calendar\Decorator;
 
+use Pear\Calendar\Decorator;
+
 /**
  * Allows Calendar include path to be redefined
  * @ignore
@@ -71,7 +73,7 @@ require_once CALENDAR_ROOT.'Util'.DIRECTORY_SEPARATOR.'Textual.php';
  * @link      http://pear.php.net/package/Calendar
  * @access    public
  */
-class Calendar_Decorator_Textual extends Calendar_Decorator
+class Textual extends Decorator
 {
     /**
      * Constructs Calendar_Decorator_Textual
@@ -96,7 +98,7 @@ class Calendar_Decorator_Textual extends Calendar_Decorator
      */
     function monthNames($format = 'long')
     {
-        return Calendar_Util_Textual::monthNames($format);
+        return \Pear\Calendar\Util\Textual::monthNames($format);
     }
 
     /**
@@ -110,7 +112,7 @@ class Calendar_Decorator_Textual extends Calendar_Decorator
      */
     function weekdayNames($format = 'long')
     {
-        return Calendar_Util_Textual::weekdayNames($format);
+        return \Pear\Calendar\Util\Textual::weekdayNames($format);
     }
 
     /**
@@ -123,7 +125,7 @@ class Calendar_Decorator_Textual extends Calendar_Decorator
      */
     function prevMonthName($format = 'long')
     {
-        return Calendar_Util_Textual::prevMonthName($this->calendar, $format);
+        return \Pear\Calendar\Util\Textual::prevMonthName($this->calendar, $format);
     }
 
     /**
@@ -136,7 +138,7 @@ class Calendar_Decorator_Textual extends Calendar_Decorator
      */
     function thisMonthName($format = 'long')
     {
-        return Calendar_Util_Textual::thisMonthName($this->calendar, $format);
+        return \Pear\Calendar\Util\Textual::thisMonthName($this->calendar, $format);
     }
 
     /**
@@ -149,7 +151,7 @@ class Calendar_Decorator_Textual extends Calendar_Decorator
      */
     function nextMonthName($format = 'long')
     {
-        return Calendar_Util_Textual::nextMonthName($this->calendar, $format);
+        return \Pear\Calendar\Util\Textual::nextMonthName($this->calendar, $format);
     }
 
     /**
@@ -162,7 +164,7 @@ class Calendar_Decorator_Textual extends Calendar_Decorator
      */
     function prevDayName($format = 'long')
     {
-        return Calendar_Util_Textual::prevDayName($this->calendar, $format);
+        return \Pear\Calendar\Util\Textual::prevDayName($this->calendar, $format);
     }
 
     /**
@@ -175,7 +177,7 @@ class Calendar_Decorator_Textual extends Calendar_Decorator
      */
     function thisDayName($format = 'long')
     {
-        return Calendar_Util_Textual::thisDayName($this->calendar, $format);
+        return \Pear\Calendar\Util\Textual::thisDayName($this->calendar, $format);
     }
 
     /**
@@ -188,7 +190,7 @@ class Calendar_Decorator_Textual extends Calendar_Decorator
      */
     function nextDayName($format = 'long')
     {
-        return Calendar_Util_Textual::nextDayName($this->calendar, $format);
+        return \Pear\Calendar\Util\Textual::nextDayName($this->calendar, $format);
     }
 
     /**
@@ -203,6 +205,6 @@ class Calendar_Decorator_Textual extends Calendar_Decorator
      */
     function orderedWeekdays($format = 'long')
     {
-        return Calendar_Util_Textual::orderedWeekdays($this->calendar, $format);
+        return \Pear\Calendar\Util\Textual::orderedWeekdays($this->calendar, $format);
     }
 }

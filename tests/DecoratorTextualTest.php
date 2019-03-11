@@ -12,7 +12,7 @@ if (! defined('CALENDAR_FIRST_DAY_OF_WEEK')) {
 class DecoratorTextualTest extends MockCalendarTestCase
 {
     function testMonthNamesLong() {
-        $Textual = new Calendar_Decorator_Textual($this->mockcal);
+        $Textual = new Textual($this->mockcal);
         $monthNames = array(
             1=>'January',
             2=>'February',
@@ -30,7 +30,7 @@ class DecoratorTextualTest extends MockCalendarTestCase
         $this->assertEquals($monthNames,$Textual->monthNames());
     }
     function testMonthNamesShort() {
-        $Textual = new Calendar_Decorator_Textual($this->mockcal);
+        $Textual = new Textual($this->mockcal);
         $monthNames = array(
             1=>'Jan',
             2=>'Feb',
@@ -48,7 +48,7 @@ class DecoratorTextualTest extends MockCalendarTestCase
         $this->assertEquals($monthNames,$Textual->monthNames('short'));
     }
     function testMonthNamesTwo() {
-        $Textual = new Calendar_Decorator_Textual($this->mockcal);
+        $Textual = new Textual($this->mockcal);
         $monthNames = array(
             1=>'Ja',
             2=>'Fe',
@@ -66,7 +66,7 @@ class DecoratorTextualTest extends MockCalendarTestCase
         $this->assertEquals($monthNames,$Textual->monthNames('two'));
     }
     function testMonthNamesOne() {
-        $Textual = new Calendar_Decorator_Textual($this->mockcal);
+        $Textual = new Textual($this->mockcal);
         $monthNames = array(
             1=>'J',
             2=>'F',
@@ -84,7 +84,7 @@ class DecoratorTextualTest extends MockCalendarTestCase
         $this->assertEquals($monthNames,$Textual->monthNames('one'));
     }
     function testWeekdayNamesLong() {
-        $Textual = new Calendar_Decorator_Textual($this->mockcal);
+        $Textual = new Textual($this->mockcal);
         $weekdayNames = array(
             0=>'Sunday',
             1=>'Monday',
@@ -97,7 +97,7 @@ class DecoratorTextualTest extends MockCalendarTestCase
         $this->assertEquals($weekdayNames,$Textual->weekdayNames());
     }
     function testWeekdayNamesShort() {
-        $Textual = new Calendar_Decorator_Textual($this->mockcal);
+        $Textual = new Textual($this->mockcal);
         $weekdayNames = array(
             0=>'Sun',
             1=>'Mon',
@@ -110,7 +110,7 @@ class DecoratorTextualTest extends MockCalendarTestCase
         $this->assertEquals($weekdayNames,$Textual->weekdayNames('short'));
     }
     function testWeekdayNamesTwo() {
-        $Textual = new Calendar_Decorator_Textual($this->mockcal);
+        $Textual = new Textual($this->mockcal);
         $weekdayNames = array(
             0=>'Su',
             1=>'Mo',
@@ -123,7 +123,7 @@ class DecoratorTextualTest extends MockCalendarTestCase
         $this->assertEquals($weekdayNames,$Textual->weekdayNames('two'));
     }
     function testWeekdayNamesOne() {
-        $Textual = new Calendar_Decorator_Textual($this->mockcal);
+        $Textual = new Textual($this->mockcal);
         $weekdayNames = array(
             0=>'S',
             1=>'M',
@@ -136,15 +136,15 @@ class DecoratorTextualTest extends MockCalendarTestCase
         $this->assertEquals($weekdayNames,$Textual->weekdayNames('one'));
     }
     function testPrevMonthNameShort() {
-        $Textual = new Calendar_Decorator_Textual($this->mockcal);
+        $Textual = new Textual($this->mockcal);
         $this->assertEquals('Sep',$Textual->prevMonthName('short'));
     }
     function testThisMonthNameShort() {
-        $Textual = new Calendar_Decorator_Textual($this->mockcal);
+        $Textual = new Textual($this->mockcal);
         $this->assertEquals('Oct',$Textual->thisMonthName('short'));
     }
     function testNextMonthNameShort() {
-        $Textual = new Calendar_Decorator_Textual($this->mockcal);
+        $Textual = new Textual($this->mockcal);
         $this->assertEquals('Nov',$Textual->nextMonthName('short'));
     }
     function testThisDayNameShort() {
@@ -153,7 +153,7 @@ class DecoratorTextualTest extends MockCalendarTestCase
             $this->markTestSkipped("Depends on optional pear/Date");
         }
 
-        $Textual = new Calendar_Decorator_Textual($this->mockcal);
+        $Textual = new Textual($this->mockcal);
         $this->assertEquals('Wed',$Textual->thisDayName('short'));
     }
     function testOrderedWeekdaysShort() {
@@ -171,7 +171,7 @@ class DecoratorTextualTest extends MockCalendarTestCase
             $day = array_shift($weekdayNames);
             array_push($weekdayNames, $day);
         }
-        $Textual = new Calendar_Decorator_Textual($this->mockcal);
+        $Textual = new Textual($this->mockcal);
         $this->assertEquals($weekdayNames,$Textual->orderedWeekdays('short'));
     }
 }

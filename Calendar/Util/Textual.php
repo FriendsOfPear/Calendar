@@ -69,7 +69,7 @@ require_once CALENDAR_ROOT.'Decorator.php';
  * @link      http://pear.php.net/package/Calendar
  * @access    public
  */
-class Calendar_Util_Textual
+class Textual
 {
 
     /**
@@ -158,7 +158,7 @@ class Calendar_Util_Textual
      */
     function prevMonthName($Calendar, $format = 'long')
     {
-        $months = Calendar_Util_Textual::monthNames($format);
+        $months = Textual::monthNames($format);
         return $months[$Calendar->prevMonth()];
     }
 
@@ -174,7 +174,7 @@ class Calendar_Util_Textual
      */
     function thisMonthName($Calendar, $format = 'long')
     {
-        $months = Calendar_Util_Textual::monthNames($format);
+        $months = Textual::monthNames($format);
         return $months[$Calendar->thisMonth()];
     }
 
@@ -190,7 +190,7 @@ class Calendar_Util_Textual
      */
     function nextMonthName($Calendar, $format = 'long')
     {
-        $months = Calendar_Util_Textual::monthNames($format);
+        $months = Textual::monthNames($format);
         return $months[$Calendar->nextMonth()];
     }
 
@@ -207,7 +207,7 @@ class Calendar_Util_Textual
      */
     function prevDayName($Calendar, $format = 'long')
     {
-        $days = Calendar_Util_Textual::weekdayNames($format);
+        $days = Textual::weekdayNames($format);
         $stamp = $Calendar->prevDay('timestamp');
         $cE = $Calendar->getEngine();
         include_once 'Date/Calc.php';
@@ -229,7 +229,7 @@ class Calendar_Util_Textual
      */
     function thisDayName($Calendar, $format='long')
     {
-        $days = Calendar_Util_Textual::weekdayNames($format);
+        $days = Textual::weekdayNames($format);
         include_once 'Date/Calc.php';
         $day = Date_Calc::dayOfWeek($Calendar->thisDay(), $Calendar->thisMonth(), $Calendar->thisYear());
         return $days[$day];
@@ -247,7 +247,7 @@ class Calendar_Util_Textual
      */
     function nextDayName($Calendar, $format='long')
     {
-        $days = Calendar_Util_Textual::weekdayNames($format);
+        $days = Textual::weekdayNames($format);
         $stamp = $Calendar->nextDay('timestamp');
         $cE = $Calendar->getEngine();
         include_once 'Date/Calc.php';
@@ -270,7 +270,7 @@ class Calendar_Util_Textual
      */
     function orderedWeekdays($Calendar, $format = 'long')
     {
-        $days = Calendar_Util_Textual::weekdayNames($format);
+        $days = Textual::weekdayNames($format);
         
         if (isset($Calendar->tableHelper)) {
             $ordereddays = $Calendar->tableHelper->getDaysOfWeek();
