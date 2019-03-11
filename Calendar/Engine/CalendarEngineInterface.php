@@ -51,7 +51,7 @@ namespace Pear\Calendar\Engine;
  * @link      http://pear.php.net/package/Calendar
  * @access protected
  */
-class Calendar_Engine_Interface
+class CalendarEngineInterface
 {
     /**
      * Provides a mechansim to make sure parsing of timestamps

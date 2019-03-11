@@ -73,7 +73,7 @@ define('CALENDAR_USE_MONTH_WEEKS',    3);
  * @copyright 2003-2007 Harry Fuecks, Lorenzo Alberton
  * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
  * @link      http://pear.php.net/package/Calendar
- * @see       Calendar_Engine_Interface
+ * @see       CalendarEngineInterface
  * @access    protected
  */
 class Calendar_Engine_Factory

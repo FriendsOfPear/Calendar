@@ -200,7 +200,7 @@ class Helper
      *
      * @return int
      * @access protected
-     * @see Calendar_Engine_Interface::getFirstDayOfWeek()
+     * @see CalendarEngineInterface::getFirstDayOfWeek()
      */
     function getFirstDay()
     {

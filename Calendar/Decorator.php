@@ -63,7 +63,7 @@ namespace Pear\Calendar;
  * @link      http://pear.php.net/package/Calendar
  * @abstract
  */
-class Calendar_Decorator
+class Decorator
 {
     /**
      * Subclass of Calendar being decorated
