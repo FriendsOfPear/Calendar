@@ -2,12 +2,14 @@
 
 namespace Pear\Calendar\Test;
 
+use Pear\Calendar\Hour;
+use Pear\Calendar\Minute;
 use PHPUnit_Framework_TestCase;
 
 class HourTest extends PHPUnit_Framework_TestCase
 {
     function setUp() {
-        $this->cal = new Calendar_Hour(2003,10,25,13);
+        $this->cal = new Hour(2003,10,25,13);
     }
     function testPrevDay_Array () {
         $this->assertEquals(
@@ -65,8 +67,7 @@ class HourTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($children,$this->cal->fetchAll());
     }
     function testSelection() {
-        require_once(CALENDAR_ROOT . 'Minute.php');
-        $selection = array(new Calendar_Minute(2003,10,25,13,32));
+        $selection = array(new Minute(2003,10,25,13,32));
         $this->cal->build($selection);
         $i = 0;
         while ( $Child = $this->cal->fetch() ) {
