@@ -69,7 +69,7 @@ require_once CALENDAR_ROOT.'Calendar.php';
  * @link      http://pear.php.net/package/Calendar
  * @access    public
  */
-class Calendar_Month extends Calendar
+class Month extends Calendar
 {
     /**
      * Constructs Calendar_Month

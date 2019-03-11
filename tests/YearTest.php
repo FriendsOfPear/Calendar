@@ -2,18 +2,20 @@
 
 namespace Pear\Calendar\Test;
 
+use Pear\Calendar\Month;
+use Pear\Calendar\Year;
 use PHPUnit_Framework_TestCase;
 
 class YearTest extends PHPUnit_Framework_TestCase
 {
     function setUp() {
-        $this->cal = new Calendar_Year(2003);
+        $this->cal = new Year(2003);
     }
     function testPrevYear_Object() {
-        $this->assertEquals(new Calendar_Year(2002), $this->cal->prevYear('object'));
+        $this->assertEquals(new Year(2002), $this->cal->prevYear('object'));
     }
     function testThisYear_Object() {
-        $this->assertEquals(new Calendar_Year(2003), $this->cal->thisYear('object'));
+        $this->assertEquals(new Year(2003), $this->cal->thisYear('object'));
     }
     function testPrevMonth () {
         $this->assertEquals(12,$this->cal->prevMonth());
@@ -109,8 +111,7 @@ class YearTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($children,$this->cal->fetchAll());
     }
     function testSelection() {
-        require_once(CALENDAR_ROOT . 'Month.php');
-        $selection = array(new Calendar_Month(2003,10));
+        $selection = array(new Month(2003,10));
         $this->cal->build($selection);
         $i = 1;
         while ( $Child = $this->cal->fetch() ) {
