@@ -2,15 +2,17 @@
 
 namespace Pear\Calendar\Test;
 
+use Pear\Calendar\Day;
+use Pear\Calendar\Month;
 use PHPUnit_Framework_TestCase;
 
 class MonthTest extends PHPUnit_Framework_TestCase
 {
 	function setUp() {
-        $this->cal = new Calendar_Month(2003,10);
+        $this->cal = new Month(2003,10);
     }
     function testPrevMonth_Object() {
-        $this->assertEquals(new Calendar_Month(2003, 9), $this->cal->prevMonth('object'));
+        $this->assertEquals(new Month(2003, 9), $this->cal->prevMonth('object'));
     }
     function testPrevDay () {
         $this->assertEquals(30,$this->cal->prevDay());
@@ -86,8 +88,7 @@ class MonthTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($children,$this->cal->fetchAll());
     }
     function testSelection() {
-        require_once(CALENDAR_ROOT . 'Day.php');
-        $selection = array(new Calendar_Day(2003,10,25));
+        $selection = array(new Day(2003,10,25));
         $this->cal->build($selection);
         $i = 1;
         while ( $Child = $this->cal->fetch() ) {
