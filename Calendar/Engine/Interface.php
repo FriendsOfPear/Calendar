@@ -36,6 +36,7 @@
  * @version   CVS: $Id$
  * @link      http://pear.php.net/package/Calendar
  */
+namespace Pear\Calendar\Engine;
 
 /**
  * The methods the classes implementing the Calendar_Engine must implement.

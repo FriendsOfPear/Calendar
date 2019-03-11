@@ -35,6 +35,7 @@
  * @version   CVS: $Id$
  * @link      http://pear.php.net/package/Calendar
  */
+namespace Pear\Calendar;
 
 /**
  * Decorates any calendar class.

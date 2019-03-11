@@ -35,6 +35,7 @@
  * @version   CVS: $Id$
  * @link      http://pear.php.net/package/Calendar
  */
+namespace Pear\Calendar\Table;
 
 /**
  * Used by Calendar_Month_Weekdays, Calendar_Month_Weeks and Calendar_Week to
