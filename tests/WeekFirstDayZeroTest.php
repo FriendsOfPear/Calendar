@@ -1,5 +1,9 @@
 <?php
 
+namespace Pear\Calendar\Test;
+
+use PHPUnit_Framework_TestCase;
+
 if (! defined('CALENDAR_FIRST_DAY_OF_WEEK')) {
     define('CALENDAR_FIRST_DAY_OF_WEEK', 0); //force firstDay = Sunday
 }

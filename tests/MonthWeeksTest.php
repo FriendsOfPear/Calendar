@@ -1,5 +1,9 @@
 <?php
 
+namespace Pear\Calendar\Test;
+
+use PHPUnit_Framework_TestCase;
+
 class MonthWeeksTest extends PHPUnit_Framework_TestCase
 {
     function setUp() {

@@ -1,5 +1,7 @@
 <?php
 
+namespace Pear\Calendar\Test;
+
 require_once 'MockCalendarTestCase.php';
 
 class DecoratorUriTest extends MockCalendarTestCase

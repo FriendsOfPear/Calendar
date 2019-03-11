@@ -1,5 +1,9 @@
 <?php
 
+namespace Pear\Calendar\Test;
+
+use PHPUnit_Framework_TestCase;
+
 require_once 'Calendar/Calendar.php';
 
 class CalendarTest extends PHPUnit_Framework_TestCase
