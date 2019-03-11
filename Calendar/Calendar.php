@@ -348,7 +348,7 @@ class Calendar
             break;
         case 'object':
             include_once CALENDAR_ROOT.'Factory.php';
-            return Calendar_Factory::createByTimestamp($returnType, $stamp);
+            return Factory::createByTimestamp($returnType, $stamp);
             break;
         case 'timestamp':
         default:

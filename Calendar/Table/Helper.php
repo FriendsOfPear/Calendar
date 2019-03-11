@@ -49,7 +49,7 @@ namespace Pear\Calendar\Table;
  * @link      http://pear.php.net/package/Calendar
  * @access public
  */
-class Calendar_Table_Helper
+class Helper
 {
     /**
      * Instance of the Calendar object being helped.

@@ -69,7 +69,7 @@ require_once CALENDAR_ROOT.'Calendar.php';
  * @link      http://pear.php.net/package/Calendar
  * @access    public
  */
-class Calendar_Minute extends Calendar
+class Minute extends Calendar
 {
     /**
      * Constructs Minute
@@ -101,7 +101,7 @@ class Calendar_Minute extends Calendar
         $sIM = $this->cE->getSecondsInMinute($this->year, $this->month,
                 $this->day, $this->hour, $this->minute);
         for ($i=0; $i < $sIM; $i++) {
-            $this->children[$i] = new Calendar_Second($this->year, $this->month,
+            $this->children[$i] = new Second($this->year, $this->month,
                 $this->day, $this->hour, $this->minute, $i);
         }
         if (count($sDates) > 0) {

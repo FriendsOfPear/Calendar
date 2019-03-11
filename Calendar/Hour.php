@@ -101,7 +101,7 @@ class Hour extends Calendar
                            $this->hour);
         for ($i=0; $i < $mIH; $i++) {
             $this->children[$i] =
-                new Calendar_Minute($this->year, $this->month, $this->day,
+                new Minute($this->year, $this->month, $this->day,
                            $this->hour, $i);
         }
         if (count($sDates) > 0) {

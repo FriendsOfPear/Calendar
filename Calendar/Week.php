@@ -38,6 +38,8 @@
  */
 namespace Pear\Calendar;
 
+use Pear\Calendar\Table\Helper;
+
 /**
  * Allows Calendar include path to be redefined
  * @ignore
@@ -75,7 +77,7 @@ require_once CALENDAR_ROOT.'Calendar.php';
  * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
  * @link      http://pear.php.net/package/Calendar
  */
-class Calendar_Week extends Calendar
+class Week extends Calendar
 {
     /**
      * Instance of Calendar_Table_Helper
@@ -138,10 +140,9 @@ class Calendar_Week extends Calendar
      */
     function __construct($y, $m, $d, $firstDay = null)
     {
-        include_once CALENDAR_ROOT.'Table/Helper.php';
         parent::__construct($y, $m, $d);
         $this->firstDay    = $this->defineFirstDayOfWeek($firstDay);
-        $this->tableHelper = new Calendar_Table_Helper($this, $this->firstDay);
+        $this->tableHelper = new Helper($this, $this->firstDay);
         $this->thisWeek    = $this->tableHelper->getWeekStart($y, $m, $d, $this->firstDay);
         $this->prevWeek    = $this->tableHelper->getWeekStart(
             $y, 
@@ -357,7 +358,7 @@ class Calendar_Week extends Calendar
             return $this->toArray($this->prevWeek);
         case 'object':
             include_once CALENDAR_ROOT.'Factory.php';
-            return Calendar_Factory::createByTimestamp('Week', $this->prevWeek);
+            return Factory::createByTimestamp('Week', $this->prevWeek);
         case 'timestamp':
         default:
             return $this->prevWeek;
@@ -400,7 +401,7 @@ class Calendar_Week extends Calendar
             return $this->toArray($this->thisWeek);
         case 'object':
             include_once CALENDAR_ROOT.'Factory.php';
-            return Calendar_Factory::createByTimestamp('Week', $this->thisWeek);
+            return Factory::createByTimestamp('Week', $this->thisWeek);
         case 'timestamp':
         default:
             return $this->thisWeek;
@@ -430,7 +431,7 @@ class Calendar_Week extends Calendar
             return $this->toArray($this->nextWeek);
         case 'object':
             include_once CALENDAR_ROOT.'Factory.php';
-            return Calendar_Factory::createByTimestamp('Week', $this->nextWeek);
+            return Factory::createByTimestamp('Week', $this->nextWeek);
         case 'timestamp':
         default:
             return $this->nextWeek;

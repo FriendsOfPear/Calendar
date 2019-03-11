@@ -75,7 +75,7 @@ require_once CALENDAR_ROOT.'Calendar.php';
  * @link      http://pear.php.net/package/Calendar
  * @access protected
  */
-class Calendar_Factory
+class Factory
 {
     /**
      * Creates a calendar object given the type and units
@@ -117,13 +117,13 @@ class Calendar_Factory
             }
             return new $class($y, $m, $firstDay);
         case 'Week':
-            return new Calendar_Week($y, $m, $d, $firstDay);
+            return new Week($y, $m, $d, $firstDay);
         case 'Hour':
             return new Hour($y, $m, $d, $h);
         case 'Minute':
-            return new Calendar_Minute($y, $m, $d, $h, $i);
+            return new Minute($y, $m, $d, $h, $i);
         case 'Second':
-            return new Calendar_Second($y, $m, $d, $h, $i, $s);
+            return new Second($y, $m, $d, $h, $i, $s);
         case 'Year':
             return new Year($y);
         default:
@@ -153,7 +153,7 @@ class Calendar_Factory
         $h   = $cE->stampToHour($stamp);
         $i   = $cE->stampToMinute($stamp);
         $s   = $cE->stampToSecond($stamp);
-        $cal = Calendar_Factory::create($type, $y, $m, $d, $h, $i, $s);
+        $cal = Factory::create($type, $y, $m, $d, $h, $i, $s);
         return $cal;
     }
 }

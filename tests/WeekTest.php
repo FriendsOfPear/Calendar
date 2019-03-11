@@ -2,12 +2,13 @@
 
 namespace Pear\Calendar\Test;
 
+use Pear\Calendar\Factory;
 use PHPUnit_Framework_TestCase;
 
 class WeekTest extends PHPUnit_Framework_TestCase
 {
     function setUp() {
-        $this->cal = Calendar_Factory::create('Week', 2003, 10, 9);
+        $this->cal = Factory::create('Week', 2003, 10, 9);
         //print_r($this->cal);
     }
     function testThisYear () {
@@ -181,17 +182,17 @@ class WeekTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($testArray, $this->cal->nextWeek('array'));
     }
     function testPrevWeekObject() {
-        $testWeek = Calendar_Factory::create('Week', 2003, 9, 29); //week starts on monday
+        $testWeek = Factory::create('Week', 2003, 9, 29); //week starts on monday
         $Week = $this->cal->prevWeek('object');
         $this->assertEquals($testWeek->getTimeStamp(), $Week->getTimeStamp());
     }
     function testThisWeekObject() {
-        $testWeek = Calendar_Factory::create('Week', 2003, 10, 6); //week starts on monday
+        $testWeek = Factory::create('Week', 2003, 10, 6); //week starts on monday
         $Week = $this->cal->thisWeek('object');
         $this->assertEquals($testWeek->getTimeStamp(), $Week->getTimeStamp());
     }
     function testNextWeekObject() {
-        $testWeek = Calendar_Factory::create('Week', 2003, 10, 13); //week starts on monday
+        $testWeek = Factory::create('Week', 2003, 10, 13); //week starts on monday
         $Week = $this->cal->nextWeek('object');
         $this->assertEquals($testWeek->getTimeStamp(), $Week->getTimeStamp());
     }
@@ -221,7 +222,7 @@ class WeekTest extends PHPUnit_Framework_TestCase
 
     function testSelection() {
         require_once(CALENDAR_ROOT . 'Day.php');
-        $selection = array(Calendar_Factory::create('Day', 2003, 10, 7));
+        $selection = array(Factory::create('Day', 2003, 10, 7));
         $this->cal->build($selection);
         $i = 1;
         while ($Child = $this->cal->fetch()) {
@@ -235,20 +236,20 @@ class WeekTest extends PHPUnit_Framework_TestCase
     function testSelectionCornerCase() {
         require_once(CALENDAR_ROOT . 'Day.php');
         $selectedDays = array(
-            Calendar_Factory::create('Day', 2003, 12, 29),
-            Calendar_Factory::create('Day', 2003, 12, 30),
-            Calendar_Factory::create('Day', 2003, 12, 31),
-            Calendar_Factory::create('Day', 2004, 01, 01),
-            Calendar_Factory::create('Day', 2004, 01, 02),
-            Calendar_Factory::create('Day', 2004, 01, 03),
-            Calendar_Factory::create('Day', 2004, 01, 04)
+            Factory::create('Day', 2003, 12, 29),
+            Factory::create('Day', 2003, 12, 30),
+            Factory::create('Day', 2003, 12, 31),
+            Factory::create('Day', 2004, 01, 01),
+            Factory::create('Day', 2004, 01, 02),
+            Factory::create('Day', 2004, 01, 03),
+            Factory::create('Day', 2004, 01, 04)
         );
-        $this->cal = Calendar_Factory::create('Week', 2003, 12, 31, 0);
+        $this->cal = Factory::create('Week', 2003, 12, 31, 0);
         $this->cal->build($selectedDays);
         while ($Day = $this->cal->fetch()) {
             $this->assertTrue($Day->isSelected());
         }
-        $this->cal = Calendar_Factory::create('Week', 2004, 1, 1, 0);
+        $this->cal = Factory::create('Week', 2004, 1, 1, 0);
         $this->cal->build($selectedDays);
         while ($Day = $this->cal->fetch()) {
             $this->assertTrue($Day->isSelected());
