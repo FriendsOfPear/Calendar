@@ -6,7 +6,14 @@ use PHPUnit_Framework_TestCase;
 
 class MockCalendarTestCase extends PHPUnit_Framework_TestCase
 {
+    /**
+     * @var \PEAR\Calendar\Engine\CalendarEngineInterface
+     */
 	var $mockengine;
+
+    /**
+     * @var \PEAR\Calendar\Second
+     */
     var $mockcal;
 
     function setUp() {
