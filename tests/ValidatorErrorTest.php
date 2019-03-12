@@ -4,8 +4,6 @@ namespace PEAR\Calendar\Test;
 
 use PHPUnit_Framework_TestCase;
 
-require_once 'Calendar/Validator.php';
-
 class ValidatorErrorTest extends PHPUnit_Framework_TestCase
 {
     var $vError;

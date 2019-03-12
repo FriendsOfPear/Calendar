@@ -130,7 +130,7 @@ class Calendar
     /**
      * Instance of Calendar_Validator (lazy initialized when isValid() or
      * getValidor() is called
-     * @var Calendar_Validator
+     * @var Validator
      * @access private
      */
     var $validator;
@@ -451,14 +451,14 @@ class Calendar
     /**
      * Returns an instance of Calendar_Validator
      *
-     * @return Calendar_Validator
+     * @return Validator
      * @access public
      */
     function & getValidator()
     {
         if (!isset($this->validator)) {
             include_once CALENDAR_ROOT.'Validator.php';
-            $this->validator = new Calendar_Validator($this);
+            $this->validator = new Validator($this);
         }
         return $this->validator;
     }

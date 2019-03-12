@@ -326,7 +326,7 @@ class Decorator
     /**
      * Returns an instance of Calendar_Validator
      *
-     * @return Calendar_Validator
+     * @return Validator
      * @access public
      */
     function & getValidator()
