@@ -38,11 +38,6 @@
 namespace Pear\Calendar\Engine;
 
 /**
- * Load PEAR::Date class
- */
-require_once 'Date.php';
-
-/**
  * Performs calendar calculations based on the PEAR::Date class
  * Timestamps are in the ISO-8601 format (YYYY-MM-DD HH:MM:SS)
  *
@@ -54,7 +49,7 @@ require_once 'Date.php';
  * @link      http://pear.php.net/package/Calendar
  * @access protected
  */
-class Calendar_Engine_PearDate /* implements Calendar_Engine_Interface */
+class PearDate /* implements Calendar_Engine_Interface */
 {
     /**
      * Makes sure a given timestamp is only ever parsed once
@@ -85,7 +80,7 @@ class Calendar_Engine_PearDate /* implements Calendar_Engine_Interface */
      */
     function stampToYear($stamp)
     {
-        $date = Calendar_Engine_PearDate::stampCollection($stamp);
+        $date = PearDate::stampCollection($stamp);
         return (int)$date->year;
     }
 
@@ -99,7 +94,7 @@ class Calendar_Engine_PearDate /* implements Calendar_Engine_Interface */
      */
     function stampToMonth($stamp)
     {
-        $date = Calendar_Engine_PearDate::stampCollection($stamp);
+        $date = PearDate::stampCollection($stamp);
         return (int)$date->month;
     }
 
@@ -113,7 +108,7 @@ class Calendar_Engine_PearDate /* implements Calendar_Engine_Interface */
      */
     function stampToDay($stamp)
     {
-        $date = Calendar_Engine_PearDate::stampCollection($stamp);
+        $date = PearDate::stampCollection($stamp);
         return (int)$date->day;
     }
 
@@ -127,7 +122,7 @@ class Calendar_Engine_PearDate /* implements Calendar_Engine_Interface */
      */
     function stampToHour($stamp)
     {
-        $date = Calendar_Engine_PearDate::stampCollection($stamp);
+        $date = PearDate::stampCollection($stamp);
         return (int)$date->hour;
     }
 
@@ -141,7 +136,7 @@ class Calendar_Engine_PearDate /* implements Calendar_Engine_Interface */
      */
     function stampToMinute($stamp)
     {
-        $date = Calendar_Engine_PearDate::stampCollection($stamp);
+        $date = PearDate::stampCollection($stamp);
         return (int)$date->minute;
     }
 
@@ -155,7 +150,7 @@ class Calendar_Engine_PearDate /* implements Calendar_Engine_Interface */
      */
     function stampToSecond($stamp)
     {
-        $date = Calendar_Engine_PearDate::stampCollection($stamp);
+        $date = PearDate::stampCollection($stamp);
         return (int)$date->second;
     }
 
@@ -175,7 +170,7 @@ class Calendar_Engine_PearDate /* implements Calendar_Engine_Interface */
     function dateToStamp($y, $m, $d, $h=0, $i=0, $s=0)
     {
         $r = array();
-        Calendar_Engine_PearDate::adjustDate($y, $m, $d, $h, $i, $s);
+        PearDate::adjustDate($y, $m, $d, $h, $i, $s);
         $key = $y.$m.$d.$h.$i.$s;
         if (!isset($r[$key])) {
             $r[$key] = sprintf("%04d-%02d-%02d %02d:%02d:%02d",
@@ -500,7 +495,7 @@ class Calendar_Engine_PearDate /* implements Calendar_Engine_Interface */
         if (is_null($today)) {
             $today = new Date();
         }
-        $date = Calendar_Engine_PearDate::stampCollection($stamp);
+        $date = PearDate::stampCollection($stamp);
         return (   $date->day == $today->getDay()
                 && $date->month == $today->getMonth()
                 && $date->year == $today->getYear()
