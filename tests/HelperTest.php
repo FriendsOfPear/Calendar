@@ -2,12 +2,13 @@
 
 namespace PEAR\Calendar\Test;
 
+use PEAR\Calendar\Table\Helper;
 use PHPUnit_Framework_TestCase;
 
 class HelperTest extends PHPUnit_Framework_TestCase
 {
 	function setUp() {
-        $this->mockengine = $this->getMockBuilder('Calendar_Engine_Interface')
+        $this->mockengine = $this->getMockBuilder('PEAR\Calendar\Engine\CalendarEngineInterface')
                                  ->getMock();
         $this->mockengine->method('getMinYears')->willReturn(1970);
         $this->mockengine->method('getMaxYears')->willReturn(2037);
@@ -34,40 +35,40 @@ class HelperTest extends PHPUnit_Framework_TestCase
     }
     function testGetFirstDay() {
         for ( $i = 0; $i <= 7; $i++ ) {
-            $Helper = new Calendar_Table_Helper($this->mockcal,$i);
+            $Helper = new Helper($this->mockcal,$i);
             $this->assertEquals($Helper->getFirstDay(),$i);
         }
     }
     function testGetDaysOfWeekMonday() {
-        $Helper = new Calendar_Table_Helper($this->mockcal);
+        $Helper = new Helper($this->mockcal);
         $this->assertEquals($Helper->getDaysOfWeek(),array(1,2,3,4,5,6,0));
     }
     function testGetDaysOfWeekSunday() {
-        $Helper = new Calendar_Table_Helper($this->mockcal,0);
+        $Helper = new Helper($this->mockcal,0);
         $this->assertEquals($Helper->getDaysOfWeek(),array(0,1,2,3,4,5,6));
     }
     function testGetDaysOfWeekThursday() {
-        $Helper = new Calendar_Table_Helper($this->mockcal,4);
+        $Helper = new Helper($this->mockcal,4);
         $this->assertEquals($Helper->getDaysOfWeek(),array(4,5,6,0,1,2,3));
     }
     function testGetNumWeeks() {
-        $Helper = new Calendar_Table_Helper($this->mockcal);
+        $Helper = new Helper($this->mockcal);
         $this->assertEquals($Helper->getNumWeeks(),5);
     }
     function testGetNumTableDaysInMonth() {
-        $Helper = new Calendar_Table_Helper($this->mockcal);
+        $Helper = new Helper($this->mockcal);
         $this->assertEquals($Helper->getNumTableDaysInMonth(),35);
     }
     function testGetEmptyDaysBefore() {
-        $Helper = new Calendar_Table_Helper($this->mockcal);
+        $Helper = new Helper($this->mockcal);
         $this->assertEquals($Helper->getEmptyDaysBefore(),2);
     }
     function testGetEmptyDaysAfter() {
-        $Helper = new Calendar_Table_Helper($this->mockcal);
+        $Helper = new Helper($this->mockcal);
         $this->assertEquals($Helper->getEmptyDaysAfter(),33);
     }
     function testGetEmptyDaysAfterOffset() {
-        $Helper = new Calendar_Table_Helper($this->mockcal);
+        $Helper = new Helper($this->mockcal);
         $this->assertEquals($Helper->getEmptyDaysAfterOffset(),5);
     }
 }
