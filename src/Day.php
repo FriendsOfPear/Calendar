@@ -46,11 +46,6 @@ if (!defined('CALENDAR_ROOT')) {
 }
 
 /**
- * Load Calendar base class
- */
-require_once CALENDAR_ROOT.'Calendar.php';
-
-/**
  * Represents a Day and builds Hours.
  * <code>
  * require_once 'Calendar/Day.php';
