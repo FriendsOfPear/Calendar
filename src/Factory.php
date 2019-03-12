@@ -92,14 +92,14 @@ class Factory
             }
             switch (CALENDAR_MONTH_STATE) {
             case CALENDAR_USE_MONTH_WEEKDAYS:
-                $class = 'Calendar_Month_Weekdays';
+                $class = 'PEAR\Calendar\Month\Weekdays';
                 break;
             case CALENDAR_USE_MONTH_WEEKS:
-                $class = 'Calendar_Month_Weeks';
+                $class = 'PEAR\Calendar\Month\Weeks';
                 break;
             case CALENDAR_USE_MONTH:
             default:
-                $class = 'Pear\Calendar\Month';
+                $class = 'PEAR\Calendar\Month';
                 break;
             }
             return new $class($y, $m, $firstDay);

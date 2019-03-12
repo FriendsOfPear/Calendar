@@ -97,7 +97,7 @@ class Uri extends Decorator
      */
     function setFragments($y, $m = null, $d = null, $h = null, $i = null, $s = null)
     {
-        $this->Uri = new \Pear\Calendar\Util\Uri($y, $m, $d, $h, $i, $s);
+        $this->Uri = new \PEAR\Calendar\Util\Uri($y, $m, $d, $h, $i, $s);
     }
 
     /**
