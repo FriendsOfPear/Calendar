@@ -18,7 +18,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Pear\\Calendar\\": "Calendar/"
+            "Pear\\Calendar\\": "src/"
         }
     },
     "autoload-dev": {
