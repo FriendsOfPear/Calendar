@@ -38,6 +38,7 @@
     },
     "type": "library",
     "require": {
+        "php": ">=5.3.0",
         "friendsofpear/pear_exception": "^0.0.1"
     },
     "require-dev": {
