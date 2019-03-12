@@ -8,87 +8,125 @@ use PHPUnit_Framework_TestCase;
 
 class MonthWeeksTest extends PHPUnit_Framework_TestCase
 {
-    function setUp() {
+    function setUp()
+    {
         $this->cal = new Weeks(2003, 10);
     }
-    function testPrevDay () {
+
+    function testPrevDay()
+    {
         $this->assertEquals(30, $this->cal->prevDay());
     }
-    function testPrevDay_Array () {
+
+    function testPrevDay_Array()
+    {
         $this->assertEquals(
             array(
-                'year'   => 2003,
-                'month'  => 9,
-                'day'    => 30,
-                'hour'   => 0,
+                'year' => 2003,
+                'month' => 9,
+                'day' => 30,
+                'hour' => 0,
                 'minute' => 0,
                 'second' => 0),
             $this->cal->prevDay('array'));
     }
-    function testThisDay () {
+
+    function testThisDay()
+    {
         $this->assertEquals(1, $this->cal->thisDay());
     }
-    function testNextDay () {
+
+    function testNextDay()
+    {
         $this->assertEquals(2, $this->cal->nextDay());
     }
-    function testPrevHour () {
+
+    function testPrevHour()
+    {
         $this->assertEquals(23, $this->cal->prevHour());
     }
-    function testThisHour () {
+
+    function testThisHour()
+    {
         $this->assertEquals(0, $this->cal->thisHour());
     }
-    function testNextHour () {
+
+    function testNextHour()
+    {
         $this->assertEquals(1, $this->cal->nextHour());
     }
-    function testPrevMinute () {
+
+    function testPrevMinute()
+    {
         $this->assertEquals(59, $this->cal->prevMinute());
     }
-    function testThisMinute () {
+
+    function testThisMinute()
+    {
         $this->assertEquals(0, $this->cal->thisMinute());
     }
-    function testNextMinute () {
+
+    function testNextMinute()
+    {
         $this->assertEquals(1, $this->cal->nextMinute());
     }
-    function testPrevSecond () {
+
+    function testPrevSecond()
+    {
         $this->assertEquals(59, $this->cal->prevSecond());
     }
-    function testThisSecond () {
+
+    function testThisSecond()
+    {
         $this->assertEquals(0, $this->cal->thisSecond());
     }
-    function testNextSecond () {
+
+    function testNextSecond()
+    {
         $this->assertEquals(1, $this->cal->nextSecond());
     }
-    function testGetTimeStamp() {
-        $stamp = mktime(0,0,0,10,1,2003);
-        $this->assertEquals($stamp,$this->cal->getTimeStamp());
-    }
-    function TestOfMonthWeeksBuild() {
-        $this->UnitTestCase('Test of Month_Weeks::build()');
-    }
-    function testSize() {
-        $this->cal->build();
-        $this->assertEquals(5,$this->cal->size());
+
+    function testGetTimeStamp()
+    {
+        $stamp = mktime(0, 0, 0, 10, 1, 2003);
+        $this->assertEquals($stamp, $this->cal->getTimeStamp());
     }
 
-    function testFetch() {
+    function TestOfMonthWeeksBuild()
+    {
+        $this->UnitTestCase('Test of Month_Weeks::build()');
+    }
+
+    function testSize()
+    {
         $this->cal->build();
-        $i=0;
+        $this->assertEquals(5, $this->cal->size());
+    }
+
+    function testFetch()
+    {
+        $this->cal->build();
+        $i = 0;
         while ($Child = $this->cal->fetch()) {
             $i++;
         }
-        $this->assertEquals(5,$i);
+        $this->assertEquals(5, $i);
     }
-    function testFetchAll() {
+
+    function testFetchAll()
+    {
         $this->cal->build();
         $children = array();
         $i = 1;
-        while ( $Child = $this->cal->fetch() ) {
-            $children[$i]=$Child;
+        while ($Child = $this->cal->fetch()) {
+            $children[$i] = $Child;
             $i++;
         }
-        $this->assertEquals($children,$this->cal->fetchAll());
+        $this->assertEquals($children, $this->cal->fetchAll());
     }
-    function testSelection() {
+
+    function testSelection()
+    {
         $selection = array(new Week(2003, 10, 12));
         $this->cal->build($selection);
         $i = 1;
@@ -103,7 +141,9 @@ class MonthWeeksTest extends PHPUnit_Framework_TestCase
         }
         $this->assertTrue($Child->isSelected());
     }
-    function testEmptyDaysBefore_AfterAdjust() {
+
+    function testEmptyDaysBefore_AfterAdjust()
+    {
         $this->cal = new Weeks(2004, 0);
         $this->cal->build();
         $expected = (CALENDAR_FIRST_DAY_OF_WEEK == 0) ? 1 : 0;

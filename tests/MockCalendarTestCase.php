@@ -9,20 +9,21 @@ class MockCalendarTestCase extends PHPUnit_Framework_TestCase
     /**
      * @var \PEAR\Calendar\Engine\CalendarEngineInterface
      */
-	var $mockengine;
+    var $mockengine;
 
     /**
      * @var \PEAR\Calendar\Second
      */
     var $mockcal;
 
-    function setUp() {
+    function setUp()
+    {
         $this->mockengine = $this->getMockBuilder('PEAR\Calendar\Engine\CalendarEngineInterface')
-                                 ->getMock();
+            ->getMock();
 
         $this->mockcal = $this->getMockBuilder('PEAR\Calendar\Second')
-                              ->disableOriginalConstructor()
-                              ->getMock();
+            ->disableOriginalConstructor()
+            ->getMock();
         $this->mockcal->method('prevYear')->willReturn(2002);
         $this->mockcal->method('thisYear')->willReturn(2003);
         $this->mockcal->method('nextYear')->willReturn(2004);
@@ -44,9 +45,10 @@ class MockCalendarTestCase extends PHPUnit_Framework_TestCase
         $this->mockcal->method('getEngine')->willReturn($this->mockengine);
         $this->mockcal->method('getTimestamp')->willReturn(12345);
     }
-    
-    function tearDown() {
-        unset ( $this->mockengine );
-        unset ( $this->mockcal );
+
+    function tearDown()
+    {
+        unset ($this->mockengine);
+        unset ($this->mockcal);
     }
 }
