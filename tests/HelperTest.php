@@ -22,7 +22,7 @@ class HelperTest extends PHPUnit_Framework_TestCase
         $this->mockengine->method('getFirstDayOfWeek')->willReturn(1);
         $this->mockengine->method('getFirstDayInMonth')->willReturn(3);
 
-        $this->mockcal = $this->getMockBuilder('Calendar_Second')
+        $this->mockcal = $this->getMockBuilder('PEAR\Calendar\Second')
                               ->disableOriginalConstructor()
                               ->getMock();
         $this->mockcal->method('thisYear')->willReturn(2003);
