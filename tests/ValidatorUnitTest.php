@@ -7,7 +7,7 @@ use PHPUnit_Framework_TestCase;
 class ValidatorUnitTest extends PHPUnit_Framework_TestCase
 {
     function setUp() {
-        $this->mockengine = $this->getMockBuilder('Calendar_Engine_Interface')
+        $this->mockengine = $this->getMockBuilder('PEAR\Calendar\Engine\CalendarEngineInterfaceInterface')
                            ->getMock();
         $this->mockengine->method('getMinYears')->willReturn(1970);
         $this->mockengine->method('getMaxYears')->willReturn(2037);
@@ -16,7 +16,7 @@ class ValidatorUnitTest extends PHPUnit_Framework_TestCase
         $this->mockengine->method('getHoursInDay')->willReturn(24);
         $this->mockengine->method('getMinutesInHour')->willReturn(60);
         $this->mockengine->method('getSecondsInMinute')->willReturn(60);
-        $this->mockcal = $this->getMockBuilder('Calendar_Second')
+        $this->mockcal = $this->getMockBuilder('\PEAR\Calendar\Second')
                               ->disableOriginalConstructor()
                               ->getMock();
         $this->mockcal->method('getEngine')->willReturn($this->mockengine);
