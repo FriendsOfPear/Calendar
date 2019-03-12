@@ -4,7 +4,6 @@ namespace Pear\Calendar\Test;
 
 use Pear\Calendar\Decorator\Textual;
 
-require_once 'PEAR/Registry.php';
 require_once 'MockCalendarTestCase.php';
 
 if (! defined('CALENDAR_FIRST_DAY_OF_WEEK')) {
@@ -150,11 +149,6 @@ class DecoratorTextualTest extends MockCalendarTestCase
         $this->assertEquals('Nov',$Textual->nextMonthName('short'));
     }
     function testThisDayNameShort() {
-        $reg = new PEAR_Registry;
-        if (! $reg->packageExists('Date')) {
-            $this->markTestSkipped("Depends on optional pear/Date");
-        }
-
         $Textual = new Textual($this->mockcal);
         $this->assertEquals('Wed',$Textual->thisDayName('short'));
     }
