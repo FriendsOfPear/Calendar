@@ -196,10 +196,8 @@ class Textual
     {
         $days = Textual::weekdayNames($format);
         $stamp = $Calendar->prevDay('timestamp');
-        $cE = $Calendar->getEngine();
-        include_once 'Date/Calc.php';
-        $day = Date_Calc::dayOfWeek($cE->stampToDay($stamp),
-            $cE->stampToMonth($stamp), $cE->stampToYear($stamp));
+        $date = date_create($stamp);
+        $day = date_format($date, 'w');
         return $days[$day];
     }
 
@@ -217,8 +215,8 @@ class Textual
     function thisDayName($Calendar, $format='long')
     {
         $days = Textual::weekdayNames($format);
-        include_once 'Date/Calc.php';
-        $day = Date_Calc::dayOfWeek($Calendar->thisDay(), $Calendar->thisMonth(), $Calendar->thisYear());
+        $date = date_create(sprintf('%04d-%02d-%02d', $Calendar->thisDay(), $Calendar->thisMonth(), $Calendar->thisYear()));
+        $day = date_format($date, 'w');
         return $days[$day];
     }
 
@@ -236,10 +234,8 @@ class Textual
     {
         $days = Textual::weekdayNames($format);
         $stamp = $Calendar->nextDay('timestamp');
-        $cE = $Calendar->getEngine();
-        include_once 'Date/Calc.php';
-        $day = Date_Calc::dayOfWeek($cE->stampToDay($stamp),
-            $cE->stampToMonth($stamp), $cE->stampToYear($stamp));
+        $date = date_create($stamp);
+        $day = date_format($date, 'w');
         return $days[$day];
     }
 
