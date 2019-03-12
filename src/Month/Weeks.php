@@ -104,7 +104,6 @@ class Weeks extends Month
     function build($sDates = array())
     {
         $this->tableHelper = new Helper($this, $this->firstDay);
-        include_once CALENDAR_ROOT.'Week.php';
         $numWeeks = $this->tableHelper->getNumWeeks();
         for ($i=1, $d=1; $i<=$numWeeks; $i++,
             $d+=$this->cE->getDaysInWeek(
