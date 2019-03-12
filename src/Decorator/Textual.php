@@ -80,7 +80,7 @@ class Textual extends Decorator
      */
     function monthNames($format = 'long')
     {
-        return \Pear\Calendar\Util\Textual::monthNames($format);
+        return \PEAR\Calendar\Util\Textual::monthNames($format);
     }
 
     /**
@@ -94,7 +94,7 @@ class Textual extends Decorator
      */
     function weekdayNames($format = 'long')
     {
-        return \Pear\Calendar\Util\Textual::weekdayNames($format);
+        return \PEAR\Calendar\Util\Textual::weekdayNames($format);
     }
 
     /**
@@ -107,7 +107,7 @@ class Textual extends Decorator
      */
     function prevMonthName($format = 'long')
     {
-        return \Pear\Calendar\Util\Textual::prevMonthName($this->calendar, $format);
+        return \PEAR\Calendar\Util\Textual::prevMonthName($this->calendar, $format);
     }
 
     /**
@@ -120,7 +120,7 @@ class Textual extends Decorator
      */
     function thisMonthName($format = 'long')
     {
-        return \Pear\Calendar\Util\Textual::thisMonthName($this->calendar, $format);
+        return \PEAR\Calendar\Util\Textual::thisMonthName($this->calendar, $format);
     }
 
     /**
@@ -133,7 +133,7 @@ class Textual extends Decorator
      */
     function nextMonthName($format = 'long')
     {
-        return \Pear\Calendar\Util\Textual::nextMonthName($this->calendar, $format);
+        return \PEAR\Calendar\Util\Textual::nextMonthName($this->calendar, $format);
     }
 
     /**
@@ -146,7 +146,7 @@ class Textual extends Decorator
      */
     function prevDayName($format = 'long')
     {
-        return \Pear\Calendar\Util\Textual::prevDayName($this->calendar, $format);
+        return \PEAR\Calendar\Util\Textual::prevDayName($this->calendar, $format);
     }
 
     /**
@@ -159,7 +159,7 @@ class Textual extends Decorator
      */
     function thisDayName($format = 'long')
     {
-        return \Pear\Calendar\Util\Textual::thisDayName($this->calendar, $format);
+        return \PEAR\Calendar\Util\Textual::thisDayName($this->calendar, $format);
     }
 
     /**
@@ -172,7 +172,7 @@ class Textual extends Decorator
      */
     function nextDayName($format = 'long')
     {
-        return \Pear\Calendar\Util\Textual::nextDayName($this->calendar, $format);
+        return \PEAR\Calendar\Util\Textual::nextDayName($this->calendar, $format);
     }
 
     /**
@@ -187,6 +187,6 @@ class Textual extends Decorator
      */
     function orderedWeekdays($format = 'long')
     {
-        return \Pear\Calendar\Util\Textual::orderedWeekdays($this->calendar, $format);
+        return \PEAR\Calendar\Util\Textual::orderedWeekdays($this->calendar, $format);
     }
 }
