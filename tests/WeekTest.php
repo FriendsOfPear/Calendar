@@ -221,7 +221,6 @@ class WeekTest extends PHPUnit_Framework_TestCase
     }
 
     function testSelection() {
-        require_once(CALENDAR_ROOT . 'Day.php');
         $selection = array(Factory::create('Day', 2003, 10, 7));
         $this->cal->build($selection);
         $i = 1;
@@ -234,7 +233,6 @@ class WeekTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($Child->isSelected());
     }
     function testSelectionCornerCase() {
-        require_once(CALENDAR_ROOT . 'Day.php');
         $selectedDays = array(
             Factory::create('Day', 2003, 12, 29),
             Factory::create('Day', 2003, 12, 30),
