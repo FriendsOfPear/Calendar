@@ -196,8 +196,7 @@ class Textual
     {
         $days = Textual::weekdayNames($format);
         $stamp = $Calendar->prevDay('timestamp');
-        $date = date_create($stamp);
-        $day = date_format($date, 'w');
+        $day = date('w', $stamp);
         return $days[$day];
     }
 
@@ -216,8 +215,7 @@ class Textual
     {
         $days = Textual::weekdayNames($format);
         $stamp = $Calendar->thisDay('timestamp');
-        $date = date_create($stamp);
-        $day = date_format($date, 'w');
+        $day = date('w', $stamp);
         return $days[$day];
     }
 
@@ -235,8 +233,7 @@ class Textual
     {
         $days = Textual::weekdayNames($format);
         $stamp = $Calendar->nextDay('timestamp');
-        $date = date_create($stamp);
-        $day = date_format($date, 'w');
+        $day = date('w', $stamp);
         return $days[$day];
     }
 
