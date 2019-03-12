@@ -91,7 +91,7 @@ class ValidationError
      *
      * @access protected
      */
-    function Calendar_Validation_Error($unit, $value, $message)
+    function __construct($unit, $value, $message)
     {
         $this->unit    = $unit;
         $this->value   = $value;

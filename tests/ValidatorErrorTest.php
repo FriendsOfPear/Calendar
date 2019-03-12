@@ -7,6 +7,9 @@ use PHPUnit_Framework_TestCase;
 
 class ValidatorErrorTest extends PHPUnit_Framework_TestCase
 {
+    /**
+     * @var \PEAR\Calendar\ValidationError
+     */
     var $vError;
     function setUp() {
         $this->vError = new ValidationError('foo',20,'bar');
