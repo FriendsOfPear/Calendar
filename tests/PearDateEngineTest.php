@@ -4,8 +4,6 @@ namespace Pear\Calendar\Test;
 
 use PHPUnit_Framework_TestCase;
 
-require_once 'PEAR/Registry.php';
-
 class PearDateEngineTest extends PHPUnit_Framework_TestCase
 {
     function setUp() {
