@@ -215,7 +215,8 @@ class Textual
     function thisDayName($Calendar, $format='long')
     {
         $days = Textual::weekdayNames($format);
-        $date = date_create(sprintf('%04d-%02d-%02d', $Calendar->thisDay(), $Calendar->thisMonth(), $Calendar->thisYear()));
+        $stamp = $Calendar->thisDay('timestamp');
+        $date = date_create($stamp);
         $day = date_format($date, 'w');
         return $days[$day];
     }
