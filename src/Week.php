@@ -67,7 +67,7 @@ class Week extends Calendar
 {
     /**
      * Instance of Calendar_Table_Helper
-     * @var Calendar_Table_Helper
+     * @var \PEAR\Calendar\Table\Helper
      * @access private
      */
     var $tableHelper;
@@ -424,7 +424,7 @@ class Week extends Calendar
      * Returns the instance of Calendar_Table_Helper.
      * Called from Calendar_Validator::isValidWeek
      *
-     * @return Calendar_Table_Helper
+     * @return \PEAR\Calendar\Table\Helper
      * @access protected
      */
     function & getHelper()
