@@ -12,7 +12,7 @@ class UtilUriTest extends PHPUnit_Framework_TestCase
     function setUp() {
         $mockEngine = $this->getMockBuilder('PEAR\Calendar\Engine\CalendarEngineInterface')
                            ->getMock();
-        $this->MockCal = $this->getMockBuilder('Calendar_Day')
+        $this->MockCal = $this->getMockBuilder('\PEAR\Calendar\Day')
                               ->disableOriginalConstructor()
                               ->getMock();
         $this->MockCal->method('getEngine')->willReturn($mockEngine);
