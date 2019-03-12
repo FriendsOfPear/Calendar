@@ -4,8 +4,6 @@ namespace PEAR\Calendar\Test;
 
 use PEAR\Calendar\Decorator\Textual;
 
-require_once 'MockCalendarTestCase.php';
-
 if (! defined('CALENDAR_FIRST_DAY_OF_WEEK')) {
     define ('CALENDAR_FIRST_DAY_OF_WEEK', 1);
 }

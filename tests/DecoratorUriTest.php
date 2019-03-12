@@ -4,8 +4,6 @@ namespace PEAR\Calendar\Test;
 
 use PEAR\Calendar\Decorator\Uri;
 
-require_once 'MockCalendarTestCase.php';
-
 class DecoratorUriTest extends MockCalendarTestCase
 {
     function testFragments() {

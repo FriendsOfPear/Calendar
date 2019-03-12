@@ -4,8 +4,6 @@ namespace PEAR\Calendar\Test;
 
 use PEAR\Calendar\Decorator;
 
-require_once 'MockCalendarTestCase.php';
-
 class DecoratorTest extends MockCalendarTestCase
 {
     function testPrevYear() {
