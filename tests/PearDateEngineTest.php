@@ -2,16 +2,13 @@
 
 namespace Pear\Calendar\Test;
 
+use Pear\Calendar\Engine\PearDate;
 use PHPUnit_Framework_TestCase;
 
 class PearDateEngineTest extends PHPUnit_Framework_TestCase
 {
     function setUp() {
-        $reg = new PEAR_Registry;
-        if (! $reg->packageExists('Date')) {
-            $this->markTestSkipped("Depends on optional pear/Date");
-        }
-        $this->engine = new Calendar_Engine_PearDate();
+        $this->engine = new PearDate();
     }
     function testGetSecondsInMinute() {
         $this->assertEquals($this->engine->getSecondsInMinute(),60);
