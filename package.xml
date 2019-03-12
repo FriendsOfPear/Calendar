@@ -53,7 +53,7 @@ on lunar cycles).
 </notes>
  <contents>
   <dir name="/">
-   <dir name="Calendar">
+   <dir name="src">
      <dir name="Decorator">
       <file name="Textual.php" role="php" />
       <file name="Uri.php" role="php" />
@@ -61,8 +61,7 @@ on lunar cycles).
       <file name="Wrapper.php" role="php" />
      </dir> <!-- /Decorator -->
      <dir name="Engine">
-      <file name="Interface.php" role="php" />
-      <file name="PearDate.php" role="php" />
+      <file name="CalendarEngineInterface.php" role="php" />
       <file name="UnixTS.php" role="php" />
      </dir> <!-- /Engine -->
      <dir name="Month">
@@ -130,7 +129,6 @@ on lunar cycles).
     <file name="MonthTest.php" role="test" />
     <file name="MonthWeekdaysTest.php" role="test" />
     <file name="MonthWeeksTest.php" role="test" />
-    <file name="PearDateEngineTest.php" role="test" />
     <file name="SecondTest.php" role="test" />
     <file name="UnixTsEngineTest.php" role="test" />
     <file name="UtilTextualTest.php" role="test" />

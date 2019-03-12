@@ -1,9 +1,14 @@
 <?php
 
+namespace PEAR\Calendar\Test;
+
+use PEAR\Calendar\Second;
+use PHPUnit_Framework_TestCase;
+
 class SecondTest extends PHPUnit_Framework_TestCase
 {
     function setUp() {
-        $this->cal = new Calendar_Second(2003,10,25,13,32,43);
+        $this->cal = new Second(2003,10,25,13,32,43);
     }
     function testPrevDay_Array () {
         $this->assertEquals(

@@ -35,6 +35,7 @@
  * @version   CVS: $Id$
  * @link      http://pear.php.net/package/Calendar
  */
+namespace PEAR\Calendar;
 
 /**
  * Decorates any calendar class.
@@ -62,7 +63,7 @@
  * @link      http://pear.php.net/package/Calendar
  * @abstract
  */
-class Calendar_Decorator
+class Decorator
 {
     /**
      * Subclass of Calendar being decorated
@@ -325,7 +326,7 @@ class Calendar_Decorator
     /**
      * Returns an instance of Calendar_Validator
      *
-     * @return Calendar_Validator
+     * @return Validator
      * @access public
      */
     function & getValidator()

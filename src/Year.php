@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4: */
 
 /**
- * Contains the Calendar_Month class
+ * Contains the Calendar_Minute class
  *
  * PHP versions 4 and 5
  *
@@ -35,28 +35,15 @@
  * @version   CVS: $Id$
  * @link      http://pear.php.net/package/Calendar
  */
+namespace PEAR\Calendar;
 
 /**
- * Allows Calendar include path to be redefined
- * @ignore
- */
-if (!defined('CALENDAR_ROOT')) {
-    define('CALENDAR_ROOT', 'Calendar'.DIRECTORY_SEPARATOR);
-}
-
-/**
- * Load Calendar base class
- */
-require_once CALENDAR_ROOT.'Calendar.php';
-
-/**
- * Represents a Month and builds Days
+ * Represents a Year and builds Months<br>
  * <code>
- * require_once 'Calendar/Month.php';
- * $Month = new Calendar_Month(2003, 10); // Oct 2003
- * $Month->build(); // Build Calendar_Day objects
- * while ($Day = & $Month->fetch()) {
- *     echo $Day->thisDay().'<br />';
+ * $Year = & new \PEAR\Calendar\Year(2003, 10, 21); // 21st Oct 2003
+ * $Year->build(); // Build Calendar_Month objects
+ * while ($Month = & $Year->fetch()) {
+ *     echo $Month->thisMonth().'<br />';
  * }
  * </code>
  *
@@ -68,38 +55,46 @@ require_once CALENDAR_ROOT.'Calendar.php';
  * @link      http://pear.php.net/package/Calendar
  * @access    public
  */
-class Calendar_Month extends Calendar
+class Year extends Calendar
 {
     /**
-     * Constructs Calendar_Month
+     * Constructs Calendar_Year
      *
-     * @param int $y        year e.g. 2003
-     * @param int $m        month e.g. 5
-     * @param int $firstDay first day of the week [optional]
+     * @param int $y year e.g. 2003
      *
      * @access public
      */
-    function __construct($y, $m, $firstDay=null)
+    function __construct($y)
     {
-        parent::__construct($y, $m);
-        $this->firstDay = $this->defineFirstDayOfWeek($firstDay);
+        parent::__construct($y);
     }
 
     /**
-     * Builds Day objects for this Month. Creates as many Calendar_Day objects
-     * as there are days in the month
+     * Builds the Months of the Year.<br>
+     * <b>Note:</b> by defining the constant CALENDAR_MONTH_STATE you can
+     * control what class of Calendar_Month is built e.g.;
+     * <code>
+     * require_once 'Calendar/Calendar_Year.php';
+     * define ('CALENDAR_MONTH_STATE',CALENDAR_USE_MONTH_WEEKDAYS); // Use Calendar_Month_Weekdays
+     * // define ('CALENDAR_MONTH_STATE',CALENDAR_USE_MONTH_WEEKS); // Use Calendar_Month_Weeks
+     * // define ('CALENDAR_MONTH_STATE',CALENDAR_USE_MONTH); // Use Calendar_Month
+     * </code>
+     * It defaults to building Calendar_Month objects.
      *
-     * @param array $sDates (optional) Calendar_Day objects representing selected dates
+     * @param array $sDates   (optional) array of Calendar_Month objects
+     *                        representing selected dates
+     * @param int   $firstDay (optional) first day of week
+     *                        (e.g. 0 for Sunday, 2 for Tuesday etc.)
      *
      * @return boolean
      * @access public
      */
-    function build($sDates = array())
+    function build($sDates = array(), $firstDay = null)
     {
-        include_once CALENDAR_ROOT.'Day.php';
-        $daysInMonth = $this->cE->getDaysInMonth($this->year, $this->month);
-        for ($i=1; $i<=$daysInMonth; $i++) {
-            $this->children[$i] = new Calendar_Day($this->year, $this->month, $i);
+        $this->firstDay = $this->defineFirstDayOfWeek($firstDay);
+        $monthsInYear   = $this->cE->getMonthsInYear($this->thisYear());
+        for ($i=1; $i <= $monthsInYear; $i++) {
+            $this->children[$i] = Factory::create('Month', $this->year, $i);
         }
         if (count($sDates) > 0) {
             $this->setSelection($sDates);
@@ -110,25 +105,18 @@ class Calendar_Month extends Calendar
     /**
      * Called from build()
      *
-     * @param array $sDates Calendar_Day objects representing selected dates
+     * @param array $sDates array of Calendar_Month objects representing selected dates
      *
      * @return void
      * @access private
      */
-    function setSelection($sDates)
+    function setSelection($sDates) 
     {
         foreach ($sDates as $sDate) {
-            if ($this->year == $sDate->thisYear()
-                && $this->month == $sDate->thisMonth()
-            ) {
-                $key = $sDate->thisDay();
+            if ($this->year == $sDate->thisYear()) {
+                $key = $sDate->thisMonth();
                 if (isset($this->children[$key])) {
                     $sDate->setSelected();
-                    $class = strtolower(get_class($sDate));
-                    if ($class == 'calendar_day' || $class == 'calendar_decorator') {
-                        $sDate->setFirst($this->children[$key]->isFirst());
-                        $sDate->setLast($this->children[$key]->isLast());
-                    }
                     $this->children[$key] = $sDate;
                 }
             }

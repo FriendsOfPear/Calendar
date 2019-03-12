@@ -1,9 +1,14 @@
 <?php
 
+namespace PEAR\Calendar\Test;
+
+use PEAR\Calendar\Engine\UnixTS;
+use PHPUnit_Framework_TestCase;
+
 class UnixTsEngineTest extends PHPUnit_Framework_TestCase
 {
     function setUp() {
-        $this->engine = new Calendar_Engine_UnixTs();
+        $this->engine = new UnixTs();
     }
     function testGetSecondsInMinute() {
         $this->assertEquals($this->engine->getSecondsInMinute(),60);

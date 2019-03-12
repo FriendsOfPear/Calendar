@@ -35,6 +35,7 @@
  * @version   CVS: $Id$
  * @link      http://pear.php.net/package/Calendar
  */
+namespace PEAR\Calendar\Table;
 
 /**
  * Used by Calendar_Month_Weekdays, Calendar_Month_Weeks and Calendar_Week to
@@ -48,7 +49,7 @@
  * @link      http://pear.php.net/package/Calendar
  * @access public
  */
-class Calendar_Table_Helper
+class Helper
 {
     /**
      * Instance of the Calendar object being helped.
@@ -199,7 +200,7 @@ class Calendar_Table_Helper
      *
      * @return int
      * @access protected
-     * @see Calendar_Engine_Interface::getFirstDayOfWeek()
+     * @see CalendarEngineInterface::getFirstDayOfWeek()
      */
     function getFirstDay()
     {

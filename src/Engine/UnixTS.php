@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4: */
 
 /**
- * Contains the Calendar_Engine_PearDate class
+ * Contains the Calendar_Engine_UnixTS class
  *
  * PHP versions 4 and 5
  *
@@ -29,137 +29,147 @@
  *
  * @category  Date and Time
  * @package   Calendar
- * @author    Lorenzo Alberton <l.alberton@quipo.it>
- * @copyright 2003-2007 Lorenzo Alberton
+ * @author    Harry Fuecks <hfuecks@phppatterns.com>
+ * @copyright 2003-2007 Harry Fuecks
  * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
  * @version   CVS: $Id$
  * @link      http://pear.php.net/package/Calendar
  */
+namespace PEAR\Calendar\Engine;
 
 /**
- * Load PEAR::Date class
- */
-require_once 'Date.php';
-
-/**
- * Performs calendar calculations based on the PEAR::Date class
- * Timestamps are in the ISO-8601 format (YYYY-MM-DD HH:MM:SS)
+ * Performs calendar calculations based on the PHP date() function and
+ * Unix timestamps (using PHP's mktime() function).
  *
  * @category  Date and Time
  * @package   Calendar
- * @author    Lorenzo Alberton <l.alberton@quipo.it>
- * @copyright 2003-2007 Lorenzo Alberton
+ * @author    Harry Fuecks <hfuecks@phppatterns.com>
+ * @copyright 2003-2007 Harry Fuecks
  * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
  * @link      http://pear.php.net/package/Calendar
- * @access protected
+ * @access    protected
  */
-class Calendar_Engine_PearDate /* implements Calendar_Engine_Interface */
+class UnixTS /* implements Calendar_Engine_Interface */
 {
     /**
      * Makes sure a given timestamp is only ever parsed once
+     * <pre>
+     * array (
+     *  [0] => year (e.g 2003),
+     *  [1] => month (e.g 9),
+     *  [2] => day (e.g 6),
+     *  [3] => hour (e.g 14),
+     *  [4] => minute (e.g 34),
+     *  [5] => second (e.g 45),
+     *  [6] => num days in month (e.g. 31),
+     *  [7] => week in year (e.g. 50),
+     *  [8] => day in week (e.g. 0 for Sunday)
+     * )
+     * </pre>
      * Uses a static variable to prevent date() being used twice
      * for a date which is already known
      *
-     * @param mixed $stamp Any timestamp format recognized by Pear::Date
+     * @param int $stamp Unix timestamp
      *
-     * @return object Pear::Date object
+     * @return array
      * @access protected
      */
     function stampCollection($stamp)
     {
         static $stamps = array();
-        if (!isset($stamps[$stamp])) {
-            $stamps[$stamp] = new Date($stamp);
+        if ( !isset($stamps[$stamp]) ) {
+            $date = @date('Y n j H i s t W w', $stamp);
+            $stamps[$stamp] = sscanf($date, "%d %d %d %d %d %d %d %d %d");
         }
         return $stamps[$stamp];
     }
 
     /**
-     * Returns a numeric year given a iso-8601 datetime
+     * Returns a numeric year given a timestamp
      *
-     * @param string $stamp iso-8601 datetime (YYYY-MM-DD HH:MM:SS)
+     * @param int $stamp Unix timestamp
      *
      * @return int year (e.g. 2003)
      * @access protected
      */
     function stampToYear($stamp)
     {
-        $date = Calendar_Engine_PearDate::stampCollection($stamp);
-        return (int)$date->year;
+        $date = UnixTS::stampCollection($stamp);
+        return (int)$date[0];
     }
 
     /**
-     * Returns a numeric month given a iso-8601 datetime
+     * Returns a numeric month given a timestamp
      *
-     * @param string $stamp iso-8601 datetime (YYYY-MM-DD HH:MM:SS)
+     * @param int $stamp Unix timestamp
      *
      * @return int month (e.g. 9)
      * @access protected
      */
     function stampToMonth($stamp)
     {
-        $date = Calendar_Engine_PearDate::stampCollection($stamp);
-        return (int)$date->month;
+        $date = UnixTS::stampCollection($stamp);
+        return (int)$date[1];
     }
 
     /**
-     * Returns a numeric day given a iso-8601 datetime
+     * Returns a numeric day given a timestamp
      *
-     * @param string $stamp iso-8601 datetime (YYYY-MM-DD HH:MM:SS)
+     * @param int $stamp Unix timestamp
      *
      * @return int day (e.g. 15)
      * @access protected
      */
     function stampToDay($stamp)
     {
-        $date = Calendar_Engine_PearDate::stampCollection($stamp);
-        return (int)$date->day;
+        $date = UnixTS::stampCollection($stamp);
+        return (int)$date[2];
     }
 
     /**
-     * Returns a numeric hour given a iso-8601 datetime
+     * Returns a numeric hour given a timestamp
      *
-     * @param string $stamp iso-8601 datetime (YYYY-MM-DD HH:MM:SS)
+     * @param int $stamp Unix timestamp
      *
      * @return int hour (e.g. 13)
      * @access protected
      */
     function stampToHour($stamp)
     {
-        $date = Calendar_Engine_PearDate::stampCollection($stamp);
-        return (int)$date->hour;
+        $date = UnixTS::stampCollection($stamp);
+        return (int)$date[3];
     }
 
     /**
-     * Returns a numeric minute given a iso-8601 datetime
+     * Returns a numeric minute given a timestamp
      *
-     * @param string $stamp iso-8601 datetime (YYYY-MM-DD HH:MM:SS)
+     * @param int $stamp Unix timestamp
      *
      * @return int minute (e.g. 34)
      * @access protected
      */
     function stampToMinute($stamp)
     {
-        $date = Calendar_Engine_PearDate::stampCollection($stamp);
-        return (int)$date->minute;
+        $date = UnixTS::stampCollection($stamp);
+        return (int)$date[4];
     }
 
     /**
-     * Returns a numeric second given a iso-8601 datetime
+     * Returns a numeric second given a timestamp
      *
-     * @param string $stamp iso-8601 datetime (YYYY-MM-DD HH:MM:SS)
+     * @param int $stamp Unix timestamp
      *
      * @return int second (e.g. 51)
      * @access protected
      */
     function stampToSecond($stamp)
     {
-        $date = Calendar_Engine_PearDate::stampCollection($stamp);
-        return (int)$date->second;
+        $date = UnixTS::stampCollection($stamp);
+        return (int)$date[5];
     }
 
     /**
-     * Returns a iso-8601 datetime
+     * Returns a timestamp
      *
      * @param int $y year (2003)
      * @param int $m month (9)
@@ -168,103 +178,38 @@ class Calendar_Engine_PearDate /* implements Calendar_Engine_Interface */
      * @param int $i minute (34)
      * @param int $s second (53)
      *
-     * @return string iso-8601 datetime
+     * @return int Unix timestamp
      * @access protected
      */
     function dateToStamp($y, $m, $d, $h=0, $i=0, $s=0)
     {
-        $r = array();
-        Calendar_Engine_PearDate::adjustDate($y, $m, $d, $h, $i, $s);
-        $key = $y.$m.$d.$h.$i.$s;
-        if (!isset($r[$key])) {
-            $r[$key] = sprintf("%04d-%02d-%02d %02d:%02d:%02d",
-                                $y, $m, $d, $h, $i, $s);
+        static $dates = array();
+        if (!isset($dates[$y][$m][$d][$h][$i][$s])) {
+            $dates[$y][$m][$d][$h][$i][$s] = @mktime($h, $i, $s, $m, $d, $y);
         }
-        return $r[$key];
-    }
-
-    /**
-     * Set the correct date values (useful for math operations on dates)
-     *
-     * @param int &$y year   (2003)
-     * @param int &$m month  (9)
-     * @param int &$d day    (13)
-     * @param int &$h hour   (13)
-     * @param int &$i minute (34)
-     * @param int &$s second (53)
-     *
-     * @return void
-     * @access protected
-     */
-    function adjustDate(&$y, &$m, &$d, &$h, &$i, &$s)
-    {
-        if ($s < 0) {
-            $m -= floor($s / 60);
-            $s = -$s % 60;
-        }
-        if ($s > 60) {
-            $m += floor($s / 60);
-            $s %= 60;
-        }
-        if ($i < 0) {
-            $h -= floor($i / 60);
-            $i = -$i % 60;
-        }
-        if ($i > 60) {
-            $h += floor($i / 60);
-            $i %= 60;
-        }
-        if ($h < 0) {
-            $d -= floor($h / 24);
-            $h = -$h % 24;
-        }
-        if ($h > 24) {
-            $d += floor($h / 24);
-            $h %= 24;
-        }
-        for(; $m < 1; $y--, $m+=12);
-        for(; $m > 12; $y++, $m-=12);
-
-        while ($d < 1) {
-            if ($m > 1) {
-                $m--;
-            } else {
-                $m = 12;
-                $y--;
-            }
-            $d += Date_Calc::daysInMonth($m, $y);
-        }
-        for ($max_days = Date_Calc::daysInMonth($m, $y); $d > $max_days; ) {
-            $d -= $max_days;
-            if ($m < 12) {
-                $m++;
-            } else {
-                $m = 1;
-                $y++;
-            }
-        }
+        return $dates[$y][$m][$d][$h][$i][$s];
     }
 
     /**
      * The upper limit on years that the Calendar Engine can work with
      *
-     * @return int 9999
+     * @return int (2037)
      * @access protected
      */
     function getMaxYears()
     {
-        return 9999;
+        return 2037;
     }
 
     /**
      * The lower limit on years that the Calendar Engine can work with
      *
-     * @return int 0
+     * @return int (1970 if it's Windows and 1902 for all other OSs)
      * @access protected
      */
     function getMinYears()
     {
-        return 0;
+        return $min = strpos(PHP_OS, 'WIN') === false ? 1902 : 1970;
     }
 
     /**
@@ -291,7 +236,9 @@ class Calendar_Engine_PearDate /* implements Calendar_Engine_Interface */
      */
     function getDaysInMonth($y, $m)
     {
-        return (int)Date_Calc::daysInMonth($m, $y);
+        $stamp = UnixTS::dateToStamp($y, $m, 1);
+        $date  = UnixTS::stampCollection($stamp);
+        return $date[6];
     }
 
     /**
@@ -301,12 +248,14 @@ class Calendar_Engine_PearDate /* implements Calendar_Engine_Interface */
      * @param int $y year (2003)
      * @param int $m month (9)
      *
-     * @return int from 0 to 7
+     * @return int from 0 to 6
      * @access protected
      */
     function getFirstDayInMonth($y, $m)
     {
-        return (int)Date_Calc::dayOfWeek(1, $m, $y);
+        $stamp = UnixTS::dateToStamp($y, $m, 1);
+        $date  = UnixTS::stampCollection($stamp);
+        return $date[8];
     }
 
     /**
@@ -336,9 +285,9 @@ class Calendar_Engine_PearDate /* implements Calendar_Engine_Interface */
      */
     function getWeekNInYear($y, $m, $d)
     {
-        //return Date_Calc::weekOfYear($d, $m, $y); //beware, Date_Calc doesn't follow ISO-8601 standard!
-        list($nYear, $nWeek) = Date_Calc::weekOfYear4th($d, $m, $y);
-        return $nWeek;
+        $stamp = UnixTS::dateToStamp($y, $m, $d);
+        $date  = UnixTS::stampCollection($stamp);
+        return $date[7];
     }
 
     /**
@@ -354,8 +303,11 @@ class Calendar_Engine_PearDate /* implements Calendar_Engine_Interface */
      */
     function getWeekNInMonth($y, $m, $d, $firstDay=1)
     {
-        $weekEnd = ($firstDay == 0) ? $this->getDaysInWeek()-1 : $firstDay-1;
-        $end_of_week = (int)Date_Calc::nextDayOfWeek($weekEnd, 1, $m, $y, '%e', true);
+        $weekEnd = (0 == $firstDay) ? $this->getDaysInWeek()-1 : $firstDay-1;
+        $end_of_week = 1;
+        while (@date('w', @mktime(0, 0, 0, $m, $end_of_week, $y)) != $weekEnd) {
+            ++$end_of_week; //find first weekend of the month
+        }
         $w = 1;
         while ($d > $end_of_week) {
             ++$w;
@@ -374,9 +326,9 @@ class Calendar_Engine_PearDate /* implements Calendar_Engine_Interface */
      * @return int weeks number
      * @access protected
      */
-    function getWeeksInMonth($y, $m, $firstDay=1)
+    function getWeeksInMonth($y, $m, $firstDay = 1)
     {
-        $FDOM = Date_Calc::firstOfMonthWeekday($m, $y);
+        $FDOM = $this->getFirstDayInMonth($y, $m);
         if ($FDOM == 0) {
             $FDOM = $this->getDaysInWeek();
         }
@@ -404,7 +356,9 @@ class Calendar_Engine_PearDate /* implements Calendar_Engine_Interface */
      */
     function getDayOfWeek($y, $m, $d)
     {
-        return Date_Calc::dayOfWeek($d, $m, $y);
+        $stamp = UnixTS::dateToStamp($y, $m, $d);
+        $date = UnixTS::stampCollection($stamp);
+        return $date[8];
     }
 
     /**
@@ -414,7 +368,7 @@ class Calendar_Engine_PearDate /* implements Calendar_Engine_Interface */
      * @param int $m month (9)
      * @param int $d day (4)
      *
-     * @return array (0, 1, 2, 3, 4, 5, 6) 1 = Monday
+     * @return array (0,1,2,3,4,5,6) 1 = Monday
      * @access protected
      */
     function getWeekDays($y=null, $m=null, $d=null)
@@ -447,7 +401,7 @@ class Calendar_Engine_PearDate /* implements Calendar_Engine_Interface */
      * @return int (24)
      * @access protected
      */
-    function getHoursInDay($y=null,$m=null,$d=null)
+    function getHoursInDay($y=null, $m=null, $d=null)
     {
         return 24;
     }
@@ -463,7 +417,7 @@ class Calendar_Engine_PearDate /* implements Calendar_Engine_Interface */
      * @return int (60)
      * @access protected
      */
-    function getMinutesInHour($y=null,$m=null,$d=null,$h=null)
+    function getMinutesInHour($y=null, $m=null, $d=null, $h=null)
     {
         return 60;
     }
@@ -480,7 +434,7 @@ class Calendar_Engine_PearDate /* implements Calendar_Engine_Interface */
      * @return int (60)
      * @access protected
      */
-    function getSecondsInMinute($y=null,$m=null,$d=null,$h=null,$i=null)
+    function getSecondsInMinute($y=null, $m=null, $d=null, $h=null, $i=null)
     {
         return 60;
     }
@@ -497,12 +451,13 @@ class Calendar_Engine_PearDate /* implements Calendar_Engine_Interface */
     {
         static $today = null;
         if (is_null($today)) {
-            $today = new Date();
+            $today_date = @date('Y n j');
+            $today = sscanf($today_date, '%d %d %d');
         }
-        $date = Calendar_Engine_PearDate::stampCollection($stamp);
-        return (   $date->day == $today->getDay()
-                && $date->month == $today->getMonth()
-                && $date->year == $today->getYear()
+        $date = UnixTS::stampCollection($stamp);
+        return (   $date[2] == $today[2]
+                && $date[1] == $today[1]
+                && $date[0] == $today[0]
         );
     }
 }

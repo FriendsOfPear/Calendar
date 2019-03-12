@@ -36,6 +36,7 @@
  * @version   CVS: $Id$
  * @link      http://pear.php.net/package/Calendar
  */
+namespace PEAR\Calendar;
 
 /**
  * Allows Calendar include path to be redefined
@@ -72,7 +73,7 @@ define('CALENDAR_USE_MONTH_WEEKS',    3);
  * @copyright 2003-2007 Harry Fuecks, Lorenzo Alberton
  * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
  * @link      http://pear.php.net/package/Calendar
- * @see       Calendar_Engine_Interface
+ * @see       CalendarEngineInterface
  * @access    protected
  */
 class Calendar_Engine_Factory
@@ -92,7 +93,7 @@ class Calendar_Engine_Factory
             break;
         case 'UnixTS':
         default:
-            $class = 'Calendar_Engine_UnixTS';
+            $class = 'PEAR\Calendar\Engine\UnixTS';
             break;
         }
         if (!$engine) {
@@ -129,7 +130,7 @@ class Calendar
     /**
      * Instance of Calendar_Validator (lazy initialized when isValid() or
      * getValidor() is called
-     * @var Calendar_Validator
+     * @var Validator
      * @access private
      */
     var $validator;
@@ -346,8 +347,7 @@ class Calendar
             return $this->toArray($stamp);
             break;
         case 'object':
-            include_once CALENDAR_ROOT.'Factory.php';
-            return Calendar_Factory::createByTimestamp($returnType, $stamp);
+            return Factory::createByTimestamp($returnType, $stamp);
             break;
         case 'timestamp':
         default:
@@ -450,14 +450,13 @@ class Calendar
     /**
      * Returns an instance of Calendar_Validator
      *
-     * @return Calendar_Validator
+     * @return Validator
      * @access public
      */
     function & getValidator()
     {
         if (!isset($this->validator)) {
-            include_once CALENDAR_ROOT.'Validator.php';
-            $this->validator = new Calendar_Validator($this);
+            $this->validator = new Validator($this);
         }
         return $this->validator;
     }

@@ -1,9 +1,15 @@
 <?php
 
+namespace PEAR\Calendar\Test;
+
+use PEAR\Calendar\Month\Weeks;
+use PEAR\Calendar\Week;
+use PHPUnit_Framework_TestCase;
+
 class MonthWeeksTest extends PHPUnit_Framework_TestCase
 {
     function setUp() {
-        $this->cal = new Calendar_Month_Weeks(2003, 10);
+        $this->cal = new Weeks(2003, 10);
     }
     function testPrevDay () {
         $this->assertEquals(30, $this->cal->prevDay());
@@ -83,8 +89,7 @@ class MonthWeeksTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($children,$this->cal->fetchAll());
     }
     function testSelection() {
-        include_once CALENDAR_ROOT . 'Week.php';
-        $selection = array(new Calendar_Week(2003, 10, 12));
+        $selection = array(new Week(2003, 10, 12));
         $this->cal->build($selection);
         $i = 1;
         $expected = (CALENDAR_FIRST_DAY_OF_WEEK == 0) ? 3 : 2;
@@ -99,7 +104,7 @@ class MonthWeeksTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($Child->isSelected());
     }
     function testEmptyDaysBefore_AfterAdjust() {
-        $this->cal = new Calendar_Month_Weeks(2004, 0);
+        $this->cal = new Weeks(2004, 0);
         $this->cal->build();
         $expected = (CALENDAR_FIRST_DAY_OF_WEEK == 0) ? 1 : 0;
         $this->assertEquals($expected, $this->cal->tableHelper->getEmptyDaysBefore());

@@ -35,6 +35,7 @@
  * @version   CVS: $Id$
  * @link      http://pear.php.net/package/Calendar
  */
+namespace PEAR\Calendar;
 
 /**
  * Validation Error Messages
@@ -59,7 +60,7 @@ if (!defined('CALENDAR_VALUE_TOOLARGE')) {
  * @see       Calendar::getValidator()
  * @access    public
  */
-class Calendar_Validator
+class Validator
 {
     /**
      * Instance of the Calendar date object to validate
@@ -125,13 +126,13 @@ class Calendar_Validator
         $y   = $this->calendar->thisYear();
         $min = $this->cE->getMinYears();
         if ($min > $y) {
-            $this->errors[] = new Calendar_Validation_Error(
+            $this->errors[] = new ValidationError(
                 'Year', $y, CALENDAR_VALUE_TOOSMALL.$min);
             return false;
         }
         $max = $this->cE->getMaxYears();
         if ($y > $max) {
-            $this->errors[] = new Calendar_Validation_Error(
+            $this->errors[] = new ValidationError(
                 'Year', $y, CALENDAR_VALUE_TOOLARGE.$max);
             return false;
         }
@@ -149,13 +150,13 @@ class Calendar_Validator
         $m   = $this->calendar->thisMonth();
         $min = 1;
         if ($min > $m) {
-            $this->errors[] = new Calendar_Validation_Error(
+            $this->errors[] = new ValidationError(
                 'Month', $m, CALENDAR_VALUE_TOOSMALL.$min);
             return false;
         }
         $max = $this->cE->getMonthsInYear($this->calendar->thisYear());
         if ($m > $max) {
-            $this->errors[] = new Calendar_Validation_Error(
+            $this->errors[] = new ValidationError(
                 'Month', $m, CALENDAR_VALUE_TOOLARGE.$max);
             return false;
         }
@@ -173,7 +174,7 @@ class Calendar_Validator
         $d   = $this->calendar->thisDay();
         $min = 1;
         if ($min > $d) {
-            $this->errors[] = new Calendar_Validation_Error(
+            $this->errors[] = new ValidationError(
                 'Day', $d, CALENDAR_VALUE_TOOSMALL.$min);
             return false;
         }
@@ -182,7 +183,7 @@ class Calendar_Validator
             $this->calendar->thisMonth()
         );
         if ($d > $max) {
-            $this->errors[] = new Calendar_Validation_Error(
+            $this->errors[] = new ValidationError(
                 'Day', $d, CALENDAR_VALUE_TOOLARGE.$max);
             return false;
         }
@@ -200,13 +201,13 @@ class Calendar_Validator
         $h   = $this->calendar->thisHour();
         $min = 0;
         if ($min > $h) {
-            $this->errors[] = new Calendar_Validation_Error(
+            $this->errors[] = new ValidationError(
                 'Hour', $h, CALENDAR_VALUE_TOOSMALL.$min);
             return false;
         }
         $max = ($this->cE->getHoursInDay($this->calendar->thisDay())-1);
         if ($h > $max) {
-            $this->errors[] = new Calendar_Validation_Error(
+            $this->errors[] = new ValidationError(
                 'Hour', $h, CALENDAR_VALUE_TOOLARGE.$max);
             return false;
         }
@@ -224,13 +225,13 @@ class Calendar_Validator
         $i   = $this->calendar->thisMinute();
         $min = 0;
         if ($min > $i) {
-            $this->errors[] = new Calendar_Validation_Error(
+            $this->errors[] = new ValidationError(
                 'Minute', $i, CALENDAR_VALUE_TOOSMALL.$min);
             return false;
         }
         $max = ($this->cE->getMinutesInHour($this->calendar->thisHour())-1);
         if ($i > $max) {
-            $this->errors[] = new Calendar_Validation_Error(
+            $this->errors[] = new ValidationError(
                 'Minute', $i, CALENDAR_VALUE_TOOLARGE.$max);
             return false;
         }
@@ -248,13 +249,13 @@ class Calendar_Validator
         $s   = $this->calendar->thisSecond();
         $min = 0;
         if ($min > $s) {
-            $this->errors[] = new Calendar_Validation_Error(
+            $this->errors[] = new ValidationError(
                 'Second', $s, CALENDAR_VALUE_TOOSMALL.$min);
             return false;
         }
         $max = ($this->cE->getSecondsInMinute($this->calendar->thisMinute())-1);
         if ($s > $max) {
-            $this->errors[] = new Calendar_Validation_Error(
+            $this->errors[] = new ValidationError(
                 'Second', $s, CALENDAR_VALUE_TOOLARGE.$max);
             return false;
         }
@@ -264,7 +265,7 @@ class Calendar_Validator
     /**
      * Iterates over any validation errors
      *
-     * @return mixed either Calendar_Validation_Error or false
+     * @return mixed either ValidationError or false
      * @access public
      */
     function fetch()
@@ -276,101 +277,5 @@ class Calendar_Validator
             reset($this->errors);
             return false;
         }
-    }
-}
-
-/**
- * For Validation Error messages
- *
- * @category  Date and Time
- * @package   Calendar
- * @author    Harry Fuecks <hfuecks@phppatterns.com>
- * @copyright 2003-2007 Harry Fuecks
- * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
- * @link      http://pear.php.net/package/Calendar
- * @see       Calendar::fetch()
- * @access    public
- */
-class Calendar_Validation_Error
-{
-    /**
-     * Date unit (e.g. month,hour,second) which failed test
-     * @var string
-     * @access private
-     */
-    var $unit;
-
-    /**
-     * Value of unit which failed test
-     * @var int
-     * @access private
-     */
-    var $value;
-
-    /**
-     * Validation error message
-     * @var string
-     * @access private
-     */
-    var $message;
-
-    /**
-     * Constructs Calendar_Validation_Error
-     *
-     * @param string $unit    Date unit (e.g. month,hour,second)
-     * @param int    $value   Value of unit which failed test
-     * @param string $message Validation error message
-     *
-     * @access protected
-     */
-    function Calendar_Validation_Error($unit, $value, $message)
-    {
-        $this->unit    = $unit;
-        $this->value   = $value;
-        $this->message = $message;
-    }
-
-    /**
-     * Returns the Date unit
-     *
-     * @return string
-     * @access public
-     */
-    function getUnit()
-    {
-        return $this->unit;
-    }
-
-    /**
-     * Returns the value of the unit
-     *
-     * @return int
-     * @access public
-     */
-    function getValue()
-    {
-        return $this->value;
-    }
-
-    /**
-     * Returns the validation error message
-     *
-     * @return string
-     * @access public
-     */
-    function getMessage()
-    {
-        return $this->message;
-    }
-
-    /**
-     * Returns a string containing the unit, value and error message
-     *
-     * @return string
-     * @access public
-     */
-    function toString ()
-    {
-        return $this->unit.' = '.$this->value.' ['.$this->message.']';
     }
 }

@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4: */
 
 /**
- * Contains the Calendar_Hour class
+ * Contains the Calendar_Second class
  *
  * PHP versions 4 and 5
  *
@@ -35,30 +35,12 @@
  * @version   CVS: $Id$
  * @link      http://pear.php.net/package/Calendar
  */
+namespace PEAR\Calendar;
 
 /**
- * Allows Calendar include path to be redefined
- * @ignore
- */
-if (!defined('CALENDAR_ROOT')) {
-    define('CALENDAR_ROOT', 'Calendar'.DIRECTORY_SEPARATOR);
-}
-
-/**
- * Load Calendar base class
- */
-require_once CALENDAR_ROOT.'Calendar.php';
-
-/**
- * Represents an Hour and builds Minutes
- * <code>
- * require_once 'Calendar'.DIRECTORY_SEPARATOR.'Hour.php';
- * $Hour = new Calendar_Hour(2003, 10, 21, 15); // Oct 21st 2003, 3pm
- * $Hour->build(); // Build Calendar_Minute objects
- * while ($Minute = & $Hour->fetch()) {
- *     echo $Minute->thisMinute().'<br />';
- * }
- * </code>
+ * Represents a Second<br />
+ * <b>Note:</b> Seconds do not build other objects
+ * so related methods are overridden to return NULL
  *
  * @category  Date and Time
  * @package   Calendar
@@ -68,69 +50,62 @@ require_once CALENDAR_ROOT.'Calendar.php';
  * @link      http://pear.php.net/package/Calendar
  * @access    public
  */
-class Calendar_Hour extends Calendar
+class Second extends Calendar
 {
     /**
-     * Constructs Calendar_Hour
+     * Constructs Second
      *
      * @param int $y year e.g. 2003
      * @param int $m month e.g. 5
      * @param int $d day e.g. 11
      * @param int $h hour e.g. 13
-     *
-     * @access public
+     * @param int $i minute e.g. 31
+     * @param int $s second e.g. 45
      */
-    function __construct($y, $m, $d, $h)
+    function __construct($y, $m, $d, $h, $i, $s)
     {
-        parent::__construct($y, $m, $d, $h);
+        parent::__construct($y, $m, $d, $h, $i, $s);
     }
 
     /**
-     * Builds the Minutes in the Hour
+     * Overwrite build
      *
-     * @param array $sDates (optional) Calendar_Minute objects representing selected dates
+     * @param array $sDates array containing Calendar objects to select (optional)
      *
-     * @return boolean
-     * @access public
+     * @return NULL
      */
     function build($sDates = array())
     {
-        include_once CALENDAR_ROOT.'Minute.php';
-        $mIH = $this->cE->getMinutesInHour($this->year, $this->month, $this->day,
-                           $this->hour);
-        for ($i=0; $i < $mIH; $i++) {
-            $this->children[$i] =
-                new Calendar_Minute($this->year, $this->month, $this->day,
-                           $this->hour, $i);
-        }
-        if (count($sDates) > 0) {
-            $this->setSelection($sDates);
-        }
-        return true;
+        return null;
     }
 
     /**
-     * Called from build()
+     * Overwrite fetch
      *
-     * @param array $sDates Calendar_Minute objects representing selected dates
-     *
-     * @return void
-     * @access private
+     * @return NULL
      */
-    function setSelection($sDates)
+    function fetch()
     {
-        foreach ($sDates as $sDate) {
-            if ($this->year == $sDate->thisYear()
-                && $this->month == $sDate->thisMonth()
-                && $this->day == $sDate->thisDay()
-                && $this->hour == $sDate->thisHour())
-            {
-                $key = (int)$sDate->thisMinute();
-                if (isset($this->children[$key])) {
-                    $sDate->setSelected();
-                    $this->children[$key] = $sDate;
-                }
-            }
-        }
+        return null;
+    }
+
+    /**
+     * Overwrite fetchAll
+     *
+     * @return NULL
+     */
+    function fetchAll()
+    {
+        return null;
+    }
+
+    /**
+     * Overwrite size
+     *
+     * @return NULL
+     */
+    function size()
+    {
+        return null;
     }
 }

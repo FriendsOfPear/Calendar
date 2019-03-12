@@ -36,24 +36,11 @@
  * @version   CVS: $Id$
  * @link      http://pear.php.net/package/Calendar
  */
+namespace PEAR\Calendar\Month;
 
-/**
- * Allows Calendar include path to be redefined
- * @ignore
- */
-if (!defined('CALENDAR_ROOT')) {
-    define('CALENDAR_ROOT', 'Calendar'.DIRECTORY_SEPARATOR);
-}
-
-/**
- * Load Calendar base class
- */
-require_once CALENDAR_ROOT.'Calendar.php';
-
-/**
- * Load base month
- */
-require_once CALENDAR_ROOT.'Month.php';
+use PEAR\Calendar\Month;
+use PEAR\Calendar\Table\Helper;
+use PEAR\Calendar\Week;
 
 /**
  * Represents a Month and builds Weeks
@@ -75,7 +62,7 @@ require_once CALENDAR_ROOT.'Month.php';
  * @link      http://pear.php.net/package/Calendar
  * @access    public
  */
-class Calendar_Month_Weeks extends Calendar_Month
+class Weeks extends Month
 {
     /**
      * Instance of Calendar_Table_Helper
@@ -116,9 +103,7 @@ class Calendar_Month_Weeks extends Calendar_Month
      */
     function build($sDates = array())
     {
-        include_once CALENDAR_ROOT.'Table/Helper.php';
-        $this->tableHelper = new Calendar_Table_Helper($this, $this->firstDay);
-        include_once CALENDAR_ROOT.'Week.php';
+        $this->tableHelper = new Helper($this, $this->firstDay);
         $numWeeks = $this->tableHelper->getNumWeeks();
         for ($i=1, $d=1; $i<=$numWeeks; $i++,
             $d+=$this->cE->getDaysInWeek(
@@ -127,7 +112,7 @@ class Calendar_Month_Weeks extends Calendar_Month
                 $this->thisDay()
             )
         ) {
-            $this->children[$i] = new Calendar_Week(
+            $this->children[$i] = new Week(
                 $this->year, $this->month, $d, $this->tableHelper->getFirstDay());
         }
         //used to set empty days

@@ -35,25 +35,12 @@
  * @version   CVS: $Id$
  * @link      http://pear.php.net/package/Calendar
  */
-
-/**
- * Allows Calendar include path to be redefined
- * @ignore
- */
-if (!defined('CALENDAR_ROOT')) {
-    define('CALENDAR_ROOT', 'Calendar'.DIRECTORY_SEPARATOR);
-}
-
-/**
- * Load Calendar base class
- */
-require_once CALENDAR_ROOT.'Calendar.php';
+namespace PEAR\Calendar;
 
 /**
  * Represents a Minute and builds Seconds
  * <code>
- * require_once 'Calendar'.DIRECTORY_SEPARATOR.'Minute.php';
- * $Minute = new Calendar_Minute(2003, 10, 21, 15, 31); // Oct 21st 2003, 3:31pm
+ * $Minute = new \PEAR\Calendar\Minute(2003, 10, 21, 15, 31); // Oct 21st 2003, 3:31pm
  * $Minute->build(); // Build Calendar_Second objects
  * while ($Second = & $Minute->fetch()) {
  *     echo $Second->thisSecond().'<br />';
@@ -68,7 +55,7 @@ require_once CALENDAR_ROOT.'Calendar.php';
  * @link      http://pear.php.net/package/Calendar
  * @access    public
  */
-class Calendar_Minute extends Calendar
+class Minute extends Calendar
 {
     /**
      * Constructs Minute
@@ -96,11 +83,10 @@ class Calendar_Minute extends Calendar
      */
     function build($sDates = array())
     {
-        include_once CALENDAR_ROOT.'Second.php';
         $sIM = $this->cE->getSecondsInMinute($this->year, $this->month,
                 $this->day, $this->hour, $this->minute);
         for ($i=0; $i < $sIM; $i++) {
-            $this->children[$i] = new Calendar_Second($this->year, $this->month,
+            $this->children[$i] = new Second($this->year, $this->month,
                 $this->day, $this->hour, $this->minute, $i);
         }
         if (count($sDates) > 0) {

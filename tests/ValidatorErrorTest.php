@@ -1,12 +1,18 @@
 <?php
 
-require_once 'Calendar/Validator.php';
+namespace PEAR\Calendar\Test;
+
+use PEAR\Calendar\ValidationError;
+use PHPUnit_Framework_TestCase;
 
 class ValidatorErrorTest extends PHPUnit_Framework_TestCase
 {
+    /**
+     * @var \PEAR\Calendar\ValidationError
+     */
     var $vError;
     function setUp() {
-        $this->vError = new Calendar_Validation_Error('foo',20,'bar');
+        $this->vError = new ValidationError('foo',20,'bar');
     }
     function testGetUnit() {
         $this->assertEquals($this->vError->getUnit(),'foo');

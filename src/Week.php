@@ -36,25 +36,14 @@
  * @version   CVS: $Id$
  * @link      http://pear.php.net/package/Calendar
  */
+namespace PEAR\Calendar;
 
-/**
- * Allows Calendar include path to be redefined
- * @ignore
- */
-if (!defined('CALENDAR_ROOT')) {
-    define('CALENDAR_ROOT', 'Calendar'.DIRECTORY_SEPARATOR);
-}
-
-/**
- * Load Calendar base class
- */
-require_once CALENDAR_ROOT.'Calendar.php';
+use PEAR\Calendar\Table\Helper;
 
 /**
  * Represents a Week and builds Days in tabular format<br>
  * <code>
- * require_once 'Calendar/Week.php';
- * $Week = new Calendar_Week(2003, 10, 1); Oct 2003, 1st tabular week
+ * $Week = new \PEAR\Calendar\Week(2003, 10, 1); Oct 2003, 1st tabular week
  * echo '<tr>';
  * while ($Day = & $Week->fetch()) {
  *     if ($Day->isEmpty()) {
@@ -74,11 +63,11 @@ require_once CALENDAR_ROOT.'Calendar.php';
  * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
  * @link      http://pear.php.net/package/Calendar
  */
-class Calendar_Week extends Calendar
+class Week extends Calendar
 {
     /**
      * Instance of Calendar_Table_Helper
-     * @var Calendar_Table_Helper
+     * @var \PEAR\Calendar\Table\Helper
      * @access private
      */
     var $tableHelper;
@@ -137,10 +126,9 @@ class Calendar_Week extends Calendar
      */
     function __construct($y, $m, $d, $firstDay = null)
     {
-        include_once CALENDAR_ROOT.'Table/Helper.php';
         parent::__construct($y, $m, $d);
         $this->firstDay    = $this->defineFirstDayOfWeek($firstDay);
-        $this->tableHelper = new Calendar_Table_Helper($this, $this->firstDay);
+        $this->tableHelper = new Helper($this, $this->firstDay);
         $this->thisWeek    = $this->tableHelper->getWeekStart($y, $m, $d, $this->firstDay);
         $this->prevWeek    = $this->tableHelper->getWeekStart(
             $y, 
@@ -211,7 +199,6 @@ class Calendar_Week extends Calendar
      */
     function build($sDates = array())
     {
-        include_once CALENDAR_ROOT.'Day.php';
         $year  = $this->cE->stampToYear($this->thisWeek);
         $month = $this->cE->stampToMonth($this->thisWeek);
         $day   = $this->cE->stampToDay($this->thisWeek);
@@ -223,7 +210,7 @@ class Calendar_Week extends Calendar
 
         for ($i=1; $i <= $end; $i++) {
             $stamp = $this->cE->dateToStamp($year, $month, $day++);
-            $this->children[$i] = new Calendar_Day(
+            $this->children[$i] = new Day(
                 $this->cE->stampToYear($stamp),
                 $this->cE->stampToMonth($stamp),
                 $this->cE->stampToDay($stamp)
@@ -355,8 +342,7 @@ class Calendar_Week extends Calendar
         case 'array':
             return $this->toArray($this->prevWeek);
         case 'object':
-            include_once CALENDAR_ROOT.'Factory.php';
-            return Calendar_Factory::createByTimestamp('Week', $this->prevWeek);
+            return Factory::createByTimestamp('Week', $this->prevWeek);
         case 'timestamp':
         default:
             return $this->prevWeek;
@@ -398,8 +384,7 @@ class Calendar_Week extends Calendar
         case 'array':
             return $this->toArray($this->thisWeek);
         case 'object':
-            include_once CALENDAR_ROOT.'Factory.php';
-            return Calendar_Factory::createByTimestamp('Week', $this->thisWeek);
+            return Factory::createByTimestamp('Week', $this->thisWeek);
         case 'timestamp':
         default:
             return $this->thisWeek;
@@ -428,8 +413,7 @@ class Calendar_Week extends Calendar
         case 'array':
             return $this->toArray($this->nextWeek);
         case 'object':
-            include_once CALENDAR_ROOT.'Factory.php';
-            return Calendar_Factory::createByTimestamp('Week', $this->nextWeek);
+            return Factory::createByTimestamp('Week', $this->nextWeek);
         case 'timestamp':
         default:
             return $this->nextWeek;
@@ -440,7 +424,7 @@ class Calendar_Week extends Calendar
      * Returns the instance of Calendar_Table_Helper.
      * Called from Calendar_Validator::isValidWeek
      *
-     * @return Calendar_Table_Helper
+     * @return \PEAR\Calendar\Table\Helper
      * @access protected
      */
     function & getHelper()

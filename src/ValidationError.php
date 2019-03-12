@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4: */
 
 /**
- * Contains the Calendar_Decorator_Wrapper class
+ * Contains the Calendar_Validator class
  *
  * PHP versions 4 and 5
  *
@@ -30,85 +30,115 @@
  * @category  Date and Time
  * @package   Calendar
  * @author    Harry Fuecks <hfuecks@phppatterns.com>
- * @author    Lorenzo Alberton <l.alberton@quipo.it>
- * @copyright 2003-2007 Harry Fuecks, Lorenzo Alberton
+ * @copyright 2003-2007 Harry Fuecks
  * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
  * @version   CVS: $Id$
  * @link      http://pear.php.net/package/Calendar
  */
+namespace PEAR\Calendar;
 
 /**
- * Allows Calendar include path to be redefined
- * @ignore
+ * Validation Error Messages
  */
-if (!defined('CALENDAR_ROOT')) {
-    define('CALENDAR_ROOT', 'Calendar'.DIRECTORY_SEPARATOR);
+if (!defined('CALENDAR_VALUE_TOOSMALL')) {
+    define('CALENDAR_VALUE_TOOSMALL', 'Too small: min = ');
+}
+if (!defined('CALENDAR_VALUE_TOOLARGE')) {
+    define('CALENDAR_VALUE_TOOLARGE', 'Too large: max = ');
 }
 
 /**
- * Load Calendar decorator base class
- */
-require_once CALENDAR_ROOT.'Decorator.php';
-
-/**
- * Decorator to help with wrapping built children in another decorator
+ * For Validation Error messages
  *
  * @category  Date and Time
  * @package   Calendar
  * @author    Harry Fuecks <hfuecks@phppatterns.com>
- * @author    Lorenzo Alberton <l.alberton@quipo.it>
- * @copyright 2003-2007 Harry Fuecks, Lorenzo Alberton
+ * @copyright 2003-2007 Harry Fuecks
  * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
  * @link      http://pear.php.net/package/Calendar
+ * @see       Calendar::fetch()
  * @access    public
  */
-class Calendar_Decorator_Wrapper extends Calendar_Decorator
+class ValidationError
 {
     /**
-     * Constructs Calendar_Decorator_Wrapper
-     *
-     * @param object &$Calendar subclass of Calendar
-     *
-     * @access public
+     * Date unit (e.g. month,hour,second) which failed test
+     * @var string
+     * @access private
      */
-    function __construct(&$Calendar)
+    var $unit;
+
+    /**
+     * Value of unit which failed test
+     * @var int
+     * @access private
+     */
+    var $value;
+
+    /**
+     * Validation error message
+     * @var string
+     * @access private
+     */
+    var $message;
+
+    /**
+     * Constructs Calendar_Validation_Error
+     *
+     * @param string $unit    Date unit (e.g. month,hour,second)
+     * @param int    $value   Value of unit which failed test
+     * @param string $message Validation error message
+     *
+     * @access protected
+     */
+    function __construct($unit, $value, $message)
     {
-        parent::__construct($Calendar);
+        $this->unit    = $unit;
+        $this->value   = $value;
+        $this->message = $message;
     }
 
     /**
-     * Wraps objects returned from fetch in the named Decorator class
+     * Returns the Date unit
      *
-     * @param string $decorator name of Decorator class to wrap with
-     *
-     * @return object instance of named decorator
+     * @return string
      * @access public
      */
-    function & fetch($decorator)
+    function getUnit()
     {
-        $Calendar = parent::fetch();
-        if ($Calendar) {
-            $ret = new $decorator($Calendar);
-        } else {
-            $ret = false;
-        }
-        return $ret;
+        return $this->unit;
     }
 
     /**
-     * Wraps the returned calendar objects from fetchAll in the named decorator
+     * Returns the value of the unit
      *
-     * @param string $decorator name of Decorator class to wrap with
-     *
-     * @return array
+     * @return int
      * @access public
      */
-    function fetchAll($decorator)
+    function getValue()
     {
-        $children = parent::fetchAll();
-        foreach ($children as $key => $Calendar) {
-            $children[$key] = new $decorator($Calendar);
-        }
-        return $children;
+        return $this->value;
+    }
+
+    /**
+     * Returns the validation error message
+     *
+     * @return string
+     * @access public
+     */
+    function getMessage()
+    {
+        return $this->message;
+    }
+
+    /**
+     * Returns a string containing the unit, value and error message
+     *
+     * @return string
+     * @access public
+     */
+    function toString ()
+    {
+        return $this->unit.' = '.$this->value.' ['.$this->message.']';
     }
 }

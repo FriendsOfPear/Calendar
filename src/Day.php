@@ -35,6 +35,7 @@
  * @version   CVS: $Id$
  * @link      http://pear.php.net/package/Calendar
  */
+namespace PEAR\Calendar;
 
 /**
  * Allows Calendar include path to be redefined
@@ -45,15 +46,9 @@ if (!defined('CALENDAR_ROOT')) {
 }
 
 /**
- * Load Calendar base class
- */
-require_once CALENDAR_ROOT.'Calendar.php';
-
-/**
  * Represents a Day and builds Hours.
  * <code>
- * require_once 'Calendar/Day.php';
- * $Day = new Calendar_Day(2003, 10, 21); // Oct 21st 2003
+ * $Day = new \PEAR\Calendar\Day(2003, 10, 21); // Oct 21st 2003
  * while ($Hour = & $Day->fetch()) {
  *    echo $Hour->thisHour().'<br />';
  * }
@@ -67,7 +62,7 @@ require_once CALENDAR_ROOT.'Calendar.php';
  * @link      http://pear.php.net/package/Calendar
  * @access    public
  */
-class Calendar_Day extends Calendar
+class Day extends Calendar
 {
     /**
      * Marks the Day at the beginning of a week
@@ -115,12 +110,10 @@ class Calendar_Day extends Calendar
      */
     function build($sDates = array())
     {
-        include_once CALENDAR_ROOT.'Hour.php';
-
         $hID = $this->cE->getHoursInDay($this->year, $this->month, $this->day);
         for ($i=0; $i < $hID; $i++) {
             $this->children[$i] =
-                new Calendar_Hour($this->year, $this->month, $this->day, $i);
+                new Hour($this->year, $this->month, $this->day, $i);
         }
         if (count($sDates) > 0) {
             $this->setSelection($sDates);

@@ -1,15 +1,26 @@
 <?php
 
+namespace PEAR\Calendar\Test;
+
+use PHPUnit_Framework_TestCase;
+
 class MockCalendarTestCase extends PHPUnit_Framework_TestCase
 {
+    /**
+     * @var \PEAR\Calendar\Engine\CalendarEngineInterface
+     */
 	var $mockengine;
+
+    /**
+     * @var \PEAR\Calendar\Second
+     */
     var $mockcal;
 
     function setUp() {
-        $this->mockengine = $this->getMockBuilder('Calendar_Engine_Interface')
+        $this->mockengine = $this->getMockBuilder('PEAR\Calendar\Engine\CalendarEngineInterface')
                                  ->getMock();
 
-        $this->mockcal = $this->getMockBuilder('Calendar_Second')
+        $this->mockcal = $this->getMockBuilder('PEAR\Calendar\Second')
                               ->disableOriginalConstructor()
                               ->getMock();
         $this->mockcal->method('prevYear')->willReturn(2002);

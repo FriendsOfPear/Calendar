@@ -35,24 +35,11 @@
  * @version   CVS: $Id$
  * @link      http://pear.php.net/package/Calendar
  */
+namespace PEAR\Calendar\Month;
 
-/**
- * Allows Calendar include path to be redefined
- * @ignore
- */
-if (!defined('CALENDAR_ROOT')) {
-    define('CALENDAR_ROOT', 'Calendar'.DIRECTORY_SEPARATOR);
-}
-
-/**
- * Load Calendar base class
- */
-require_once CALENDAR_ROOT.'Calendar.php';
-
-/**
- * Load base month
- */
-require_once CALENDAR_ROOT.'Month.php';
+use PEAR\Calendar\Day;
+use PEAR\Calendar\Month;
+use PEAR\Calendar\Table\Helper;
 
 /**
  * Represents a Month and builds Days in tabular form<br>
@@ -83,7 +70,7 @@ require_once CALENDAR_ROOT.'Month.php';
  * @link      http://pear.php.net/package/Calendar
  * @access    public
  */
-class Calendar_Month_Weekdays extends Calendar_Month
+class Weekdays extends Month
 {
     /**
      * Instance of Calendar_Table_Helper
@@ -122,15 +109,14 @@ class Calendar_Month_Weekdays extends Calendar_Month
      *
      * @return boolean
      * @access public
-     * @see Calendar_Day::isEmpty()
+     * @see Day::isEmpty()
      * @see Calendar_Day_Base::isFirst()
      * @see Calendar_Day_Base::isLast()
      */
     function build($sDates = array())
     {
-        include_once CALENDAR_ROOT.'Table/Helper.php';
-        $this->tableHelper = new Calendar_Table_Helper($this, $this->firstDay);
-        Calendar_Month::build($sDates);
+        $this->tableHelper = new Helper($this, $this->firstDay);
+        Month::build($sDates);
         $this->buildEmptyDaysBefore();
         $this->shiftDays();
         $this->buildEmptyDaysAfter();
@@ -149,7 +135,7 @@ class Calendar_Month_Weekdays extends Calendar_Month
         $eBefore = $this->tableHelper->getEmptyDaysBefore();
         for ($i=0; $i < $eBefore; $i++) {
             $stamp = $this->cE->dateToStamp($this->year, $this->month, -$i);
-            $Day = new Calendar_Day(
+            $Day = new Day(
                                 $this->cE->stampToYear($stamp),
                                 $this->cE->stampToMonth($stamp),
                                 $this->cE->stampToDay($stamp));
@@ -184,7 +170,7 @@ class Calendar_Month_Weekdays extends Calendar_Month
         $eAfter = $this->tableHelper->getEmptyDaysAfter();
         $sDOM   = $this->tableHelper->getNumTableDaysInMonth();
         for ($i=1; $i <= $sDOM-$eAfter; $i++) {
-            $Day = new Calendar_Day($this->year, $this->month+1, $i);
+            $Day = new Day($this->year, $this->month+1, $i);
             $Day->setEmpty();
             $Day->adjust();
             array_push($this->children, $Day);

@@ -36,24 +36,9 @@
  * @version   CVS: $Id$
  * @link      http://pear.php.net/package/Calendar
  */
+namespace PEAR\Calendar\Decorator;
 
-/**
- * Allows Calendar include path to be redefined
- * @ignore
- */
-if (!defined('CALENDAR_ROOT')) {
-    define('CALENDAR_ROOT', 'Calendar'.DIRECTORY_SEPARATOR);
-}
-
-/**
- * Load Calendar decorator base class
- */
-require_once CALENDAR_ROOT.'Decorator.php';
-
-/**
- * Load the Uri utility
- */
-require_once CALENDAR_ROOT.'Util'.DIRECTORY_SEPARATOR.'Uri.php';
+use PEAR\Calendar\Decorator;
 
 /**
  * Decorator to help with building HTML links for navigating the calendar<br />
@@ -73,10 +58,10 @@ require_once CALENDAR_ROOT.'Util'.DIRECTORY_SEPARATOR.'Uri.php';
  * @copyright 2003-2007 Harry Fuecks, Lorenzo Alberton
  * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
  * @link      http://pear.php.net/package/Calendar
- * @see       Calendar_Util_Uri
+ * @see       Uri
  * @access    public
  */
-class Calendar_Decorator_Uri extends Calendar_Decorator
+class Uri extends Decorator
 {
 
     /**
@@ -112,7 +97,7 @@ class Calendar_Decorator_Uri extends Calendar_Decorator
      */
     function setFragments($y, $m = null, $d = null, $h = null, $i = null, $s = null)
     {
-        $this->Uri = new Calendar_Util_Uri($y, $m, $d, $h, $i, $s);
+        $this->Uri = new \PEAR\Calendar\Util\Uri($y, $m, $d, $h, $i, $s);
     }
 
     /**

@@ -36,6 +36,7 @@
  * @version   CVS: $Id$
  * @link      http://pear.php.net/package/Calendar
  */
+namespace PEAR\Calendar\Util;
 
 /**
  * Utility to help building HTML links for navigating the calendar<br />
@@ -59,7 +60,7 @@
  * @link      http://pear.php.net/package/Calendar
  * @access    public
  */
-class Calendar_Util_Uri
+class Uri
 {
     /**
      * Uri fragments for year, month, day etc.
