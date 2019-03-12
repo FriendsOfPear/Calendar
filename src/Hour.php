@@ -83,7 +83,6 @@ class Hour extends Calendar
      */
     function build($sDates = array())
     {
-        include_once CALENDAR_ROOT.'Minute.php';
         $mIH = $this->cE->getMinutesInHour($this->year, $this->month, $this->day,
                            $this->hour);
         for ($i=0; $i < $mIH; $i++) {
