@@ -347,7 +347,6 @@ class Calendar
             return $this->toArray($stamp);
             break;
         case 'object':
-            include_once CALENDAR_ROOT.'Factory.php';
             return Factory::createByTimestamp($returnType, $stamp);
             break;
         case 'timestamp':
@@ -457,7 +456,6 @@ class Calendar
     function & getValidator()
     {
         if (!isset($this->validator)) {
-            include_once CALENDAR_ROOT.'Validator.php';
             $this->validator = new Validator($this);
         }
         return $this->validator;
