@@ -5,14 +5,16 @@ namespace PEAR\Calendar\Test;
 use PEAR\Calendar\Day;
 use PEAR\Calendar\Hour;
 use PEAR\Calendar\Minute;
+use PEAR\Calendar\Month;
 use PEAR\Calendar\Second;
 use PEAR\Calendar\Validator;
+use PEAR\Calendar\Year;
 use PHPUnit_Framework_TestCase;
 
 class ValidatorUnitTest extends PHPUnit_Framework_TestCase
 {
     function setUp() {
-        $this->mockengine = $this->getMockBuilder('PEAR\Calendar\Engine\CalendarEngineInterfaceInterface')
+        $this->mockengine = $this->getMockBuilder('PEAR\Calendar\Engine\CalendarEngineInterface')
                            ->getMock();
         $this->mockengine->method('getMinYears')->willReturn(1970);
         $this->mockengine->method('getMaxYears')->willReturn(2037);
@@ -145,12 +147,12 @@ class ValidatorUnitTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($i,6);
     }
     function testYear() {
-        $Unit = new Calendar_Year(2038);
+        $Unit = new Year(2038);
         $Validator = $Unit->getValidator();
         $this->assertFalse($Validator->isValidYear());
     }
     function testMonth() {
-        $Unit = new Calendar_Month(2000,13);
+        $Unit = new Month(2000,13);
         $Validator = $Unit->getValidator();
         $this->assertFalse($Validator->isValidMonth());
     }
