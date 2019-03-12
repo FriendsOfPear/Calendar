@@ -58,10 +58,10 @@ use Pear\Calendar\Decorator;
  * @copyright 2003-2007 Harry Fuecks, Lorenzo Alberton
  * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
  * @link      http://pear.php.net/package/Calendar
- * @see       Calendar_Util_Uri
+ * @see       Uri
  * @access    public
  */
-class Calendar_Decorator_Uri extends Decorator
+class Uri extends Decorator
 {
 
     /**
@@ -97,7 +97,7 @@ class Calendar_Decorator_Uri extends Decorator
      */
     function setFragments($y, $m = null, $d = null, $h = null, $i = null, $s = null)
     {
-        $this->Uri = new Calendar_Util_Uri($y, $m, $d, $h, $i, $s);
+        $this->Uri = new \Pear\Calendar\Util\Uri($y, $m, $d, $h, $i, $s);
     }
 
     /**
