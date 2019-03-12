@@ -136,7 +136,7 @@ class UtilTextualTest extends MockCalendarTestCase
         $this->assertEquals('Nov',Textual::nextMonthName($this->mockcal,'short'));
     }
     function testThisDayNameShort() {
-        $this->assertEquals('Wed',Textual::thisDayName($this->mockcal,'short'));
+        $this->assertEquals('Thu',Textual::thisDayName($this->mockcal,'short'));
     }
     function testOrderedWeekdaysShort() {
         $weekdayNames = array(

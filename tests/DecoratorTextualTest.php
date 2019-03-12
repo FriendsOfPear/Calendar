@@ -148,7 +148,7 @@ class DecoratorTextualTest extends MockCalendarTestCase
     }
     function testThisDayNameShort() {
         $Textual = new Textual($this->mockcal);
-        $this->assertEquals('Wed',$Textual->thisDayName('short'));
+        $this->assertEquals('Thu',$Textual->thisDayName('short'));
     }
     function testOrderedWeekdaysShort() {
         $weekdayNames = array(
