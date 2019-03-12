@@ -53,7 +53,7 @@ on lunar cycles).
 </notes>
  <contents>
   <dir name="/">
-   <dir name="Calendar">
+   <dir name="src">
      <dir name="Decorator">
       <file name="Textual.php" role="php" />
       <file name="Uri.php" role="php" />
