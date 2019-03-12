@@ -49,7 +49,7 @@ class DecoratorTest extends MockCalendarTestCase
         $this->assertEquals(11,$Decorator->nextMonth());
     }
     function testPrevWeek() {
-        $mockweek = $this->getMockBuilder('Pear\Calendar\Week')
+        $mockweek = $this->getMockBuilder('PEAR\Calendar\Week')
                          ->disableOriginalConstructor()
                          ->getMock();
         $mockweek->method('prevWeek')->willReturn(1);
@@ -61,7 +61,7 @@ class DecoratorTest extends MockCalendarTestCase
     }
     
     function testThisWeek() {
-        $mockweek = $this->getMockBuilder('Pear\Calendar\Week')
+        $mockweek = $this->getMockBuilder('PEAR\Calendar\Week')
                          ->disableOriginalConstructor()
                          ->getMock();
         $mockweek->method('thisWeek')->willReturn(2);
@@ -72,7 +72,7 @@ class DecoratorTest extends MockCalendarTestCase
         $this->assertEquals(2,$Decorator->thisWeek());
     }
     function testNextWeek() {
-        $mockweek = $this->getMockBuilder('Pear\Calendar\Week')
+        $mockweek = $this->getMockBuilder('PEAR\Calendar\Week')
                          ->disableOriginalConstructor()
                          ->getMock();
         $mockweek->method('nextWeek')->willReturn(3);
@@ -169,7 +169,7 @@ class DecoratorTest extends MockCalendarTestCase
     }
     function testGetEngine() {
         $Decorator = new Decorator($this->mockcal);
-        $this->assertInstanceOf('Pear\Calendar\Engine\CalendarEngineInterface', $Decorator->getEngine());
+        $this->assertInstanceOf('PEAR\Calendar\Engine\CalendarEngineInterface', $Decorator->getEngine());
     }
     function testSetTimestamp() {
         $this->mockcal->expects($this->once())
@@ -223,7 +223,7 @@ class DecoratorTest extends MockCalendarTestCase
         $this->assertEquals('foo',$Decorator->returnValue('a','b','c','d'));
     }
     function testSetFirst() {
-        $mockday = $this->getMockBuilder('Pear\Calendar\Day')
+        $mockday = $this->getMockBuilder('PEAR\Calendar\Day')
                          ->disableOriginalConstructor()
                          ->getMock();
         $mockday->expects($this->once())
@@ -233,7 +233,7 @@ class DecoratorTest extends MockCalendarTestCase
         $Decorator->setFirst();
     }
     function testSetLast() {
-        $mockday = $this->getMockBuilder('Pear\Calendar\Day')
+        $mockday = $this->getMockBuilder('PEAR\Calendar\Day')
                          ->disableOriginalConstructor()
                          ->getMock();
         $mockday->expects($this->once())
@@ -243,7 +243,7 @@ class DecoratorTest extends MockCalendarTestCase
         $Decorator->setLast();
     }
     function testIsFirst() {
-        $mockday = $this->getMockBuilder('Pear\Calendar\Day')
+        $mockday = $this->getMockBuilder('PEAR\Calendar\Day')
                          ->disableOriginalConstructor()
                          ->getMock();
         $mockday->method('isFirst')->willReturn(true);
@@ -251,7 +251,7 @@ class DecoratorTest extends MockCalendarTestCase
         $this->assertTrue($Decorator->isFirst());
     }
     function testIsLast() {
-        $mockday = $this->getMockBuilder('Pear\Calendar\Day')
+        $mockday = $this->getMockBuilder('PEAR\Calendar\Day')
                          ->disableOriginalConstructor()
                          ->getMock();
         $mockday->method('isLast')->willReturn(true);
@@ -259,7 +259,7 @@ class DecoratorTest extends MockCalendarTestCase
         $this->assertTrue($Decorator->isLast());
     }
     function testSetEmpty() {
-        $mockday = $this->getMockBuilder('Pear\Calendar\Day')
+        $mockday = $this->getMockBuilder('PEAR\Calendar\Day')
                          ->disableOriginalConstructor()
                          ->getMock();
         $mockday->expects($this->once())
@@ -269,7 +269,7 @@ class DecoratorTest extends MockCalendarTestCase
         $Decorator->setEmpty();
     }
     function testIsEmpty() {
-        $mockday = $this->getMockBuilder('Pear\Calendar\Day')
+        $mockday = $this->getMockBuilder('PEAR\Calendar\Day')
                          ->disableOriginalConstructor()
                          ->getMock();
         $mockday->method('isEmpty')->willReturn(true);

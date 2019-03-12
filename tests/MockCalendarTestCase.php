@@ -10,10 +10,10 @@ class MockCalendarTestCase extends PHPUnit_Framework_TestCase
     var $mockcal;
 
     function setUp() {
-        $this->mockengine = $this->getMockBuilder('Pear\Calendar\Engine\CalendarEngineInterface')
+        $this->mockengine = $this->getMockBuilder('PEAR\Calendar\Engine\CalendarEngineInterface')
                                  ->getMock();
 
-        $this->mockcal = $this->getMockBuilder('Pear\Calendar\Second')
+        $this->mockcal = $this->getMockBuilder('PEAR\Calendar\Second')
                               ->disableOriginalConstructor()
                               ->getMock();
         $this->mockcal->method('prevYear')->willReturn(2002);
