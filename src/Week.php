@@ -43,8 +43,7 @@ use PEAR\Calendar\Table\Helper;
 /**
  * Represents a Week and builds Days in tabular format<br>
  * <code>
- * require_once 'Calendar/Week.php';
- * $Week = new Calendar_Week(2003, 10, 1); Oct 2003, 1st tabular week
+ * $Week = new \PEAR\Calendar\Week(2003, 10, 1); Oct 2003, 1st tabular week
  * echo '<tr>';
  * while ($Day = & $Week->fetch()) {
  *     if ($Day->isEmpty()) {
