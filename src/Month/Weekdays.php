@@ -35,11 +35,11 @@
  * @version   CVS: $Id$
  * @link      http://pear.php.net/package/Calendar
  */
-namespace Pear\Calendar\Month;
+namespace PEAR\Calendar\Month;
 
-use Pear\Calendar\Day;
-use Pear\Calendar\Month;
-use Pear\Calendar\Table\Helper;
+use PEAR\Calendar\Day;
+use PEAR\Calendar\Month;
+use PEAR\Calendar\Table\Helper;
 
 /**
  * Represents a Month and builds Days in tabular form<br>

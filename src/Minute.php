@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4: */
 
 /**
- * Contains the Calendar_Second class
+ * Contains the Calendar_Minute class
  *
  * PHP versions 4 and 5
  *
@@ -35,12 +35,18 @@
  * @version   CVS: $Id$
  * @link      http://pear.php.net/package/Calendar
  */
-namespace Pear\Calendar;
+namespace PEAR\Calendar;
 
 /**
- * Represents a Second<br />
- * <b>Note:</b> Seconds do not build other objects
- * so related methods are overridden to return NULL
+ * Represents a Minute and builds Seconds
+ * <code>
+ * require_once 'Calendar'.DIRECTORY_SEPARATOR.'Minute.php';
+ * $Minute = new Calendar_Minute(2003, 10, 21, 15, 31); // Oct 21st 2003, 3:31pm
+ * $Minute->build(); // Build Calendar_Second objects
+ * while ($Second = & $Minute->fetch()) {
+ *     echo $Second->thisSecond().'<br />';
+ * }
+ * </code>
  *
  * @category  Date and Time
  * @package   Calendar
@@ -50,62 +56,70 @@ namespace Pear\Calendar;
  * @link      http://pear.php.net/package/Calendar
  * @access    public
  */
-class Second extends Calendar
+class Minute extends Calendar
 {
     /**
-     * Constructs Second
+     * Constructs Minute
      *
      * @param int $y year e.g. 2003
      * @param int $m month e.g. 5
      * @param int $d day e.g. 11
      * @param int $h hour e.g. 13
      * @param int $i minute e.g. 31
-     * @param int $s second e.g. 45
+     *
+     * @access public
      */
-    function __construct($y, $m, $d, $h, $i, $s)
+    function __construct($y, $m, $d, $h, $i)
     {
-        parent::__construct($y, $m, $d, $h, $i, $s);
+        parent::__construct($y, $m, $d, $h, $i);
     }
 
     /**
-     * Overwrite build
+     * Builds the Calendar_Second objects
      *
-     * @param array $sDates array containing Calendar objects to select (optional)
+     * @param array $sDates (optional) Calendar_Second objects representing selected dates
      *
-     * @return NULL
+     * @return boolean
+     * @access public
      */
     function build($sDates = array())
     {
-        return null;
+        include_once CALENDAR_ROOT.'Second.php';
+        $sIM = $this->cE->getSecondsInMinute($this->year, $this->month,
+                $this->day, $this->hour, $this->minute);
+        for ($i=0; $i < $sIM; $i++) {
+            $this->children[$i] = new Second($this->year, $this->month,
+                $this->day, $this->hour, $this->minute, $i);
+        }
+        if (count($sDates) > 0) {
+            $this->setSelection($sDates);
+        }
+        return true;
     }
 
     /**
-     * Overwrite fetch
+     * Called from build()
      *
-     * @return NULL
-     */
-    function fetch()
-    {
-        return null;
-    }
-
-    /**
-     * Overwrite fetchAll
+     * @param array $sDates Calendar_Second objects representing selected dates
      *
-     * @return NULL
+     * @return void
+     * @access private
      */
-    function fetchAll()
+    function setSelection($sDates)
     {
-        return null;
-    }
-
-    /**
-     * Overwrite size
-     *
-     * @return NULL
-     */
-    function size()
-    {
-        return null;
+        foreach ($sDates as $sDate) {
+            if ($this->year == $sDate->thisYear()
+                && $this->month == $sDate->thisMonth()
+                && $this->day == $sDate->thisDay()
+                && $this->hour == $sDate->thisHour()
+                && $this->minute == $sDate->thisMinute())
+            {
+                $key = (int)$sDate->thisSecond();
+                if (isset($this->children[$key])) {
+                    $sDate->setSelected();
+                    $this->children[$key] = $sDate;
+                }
+            }
+        }
     }
 }

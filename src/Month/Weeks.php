@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4: */
 
 /**
- * Contains the Calendar_Minute class
+ * Contains the Calendar_Month_Weeks class
  *
  * PHP versions 4 and 5
  *
@@ -30,74 +30,97 @@
  * @category  Date and Time
  * @package   Calendar
  * @author    Harry Fuecks <hfuecks@phppatterns.com>
- * @copyright 2003-2007 Harry Fuecks
+ * @author    Lorenzo Alberton <l.alberton@quipo.it>
+ * @copyright 2003-2007 Harry Fuecks, Lorenzo Alberton
  * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
  * @version   CVS: $Id$
  * @link      http://pear.php.net/package/Calendar
  */
-namespace Pear\Calendar;
+namespace PEAR\Calendar\Month;
+
+use PEAR\Calendar\Month;
+use PEAR\Calendar\Table\Helper;
+use PEAR\Calendar\Week;
 
 /**
- * Represents a Year and builds Months<br>
+ * Represents a Month and builds Weeks
  * <code>
- * require_once 'Calendar'.DIRECTORY_SEPARATOR.'Year.php';
- * $Year = & new Calendar_Year(2003, 10, 21); // 21st Oct 2003
- * $Year->build(); // Build Calendar_Month objects
- * while ($Month = & $Year->fetch()) {
- *     echo $Month->thisMonth().'<br />';
+ * require_once 'Calendar'.DIRECTORY_SEPARATOR.'Month'.DIRECTORY_SEPARATOR.'Weeks.php';
+ * $Month = new Calendar_Month_Weeks(2003, 10); // Oct 2003
+ * $Month->build(); // Build Calendar_Day objects
+ * while ($Week = & $Month->fetch()) {
+ *     echo $Week->thisWeek().'<br />';
  * }
  * </code>
  *
  * @category  Date and Time
  * @package   Calendar
  * @author    Harry Fuecks <hfuecks@phppatterns.com>
- * @copyright 2003-2007 Harry Fuecks
+ * @author    Lorenzo Alberton <l.alberton@quipo.it>
+ * @copyright 2003-2007 Harry Fuecks, Lorenzo Alberton
  * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
  * @link      http://pear.php.net/package/Calendar
  * @access    public
  */
-class Year extends Calendar
+class Weeks extends Month
 {
     /**
-     * Constructs Calendar_Year
+     * Instance of Calendar_Table_Helper
+     * @var Calendar_Table_Helper
+     * @access private
+     */
+    var $tableHelper;
+
+    /**
+     * First day of the week
+     * @access private
+     * @var string
+     */
+    var $firstDay;
+
+    /**
+     * Constructs Calendar_Month_Weeks
      *
-     * @param int $y year e.g. 2003
+     * @param int $y        year e.g. 2003
+     * @param int $m        month e.g. 5
+     * @param int $firstDay (optional) first day of week (e.g. 0 for Sunday, 2 for Tuesday etc.)
      *
      * @access public
      */
-    function __construct($y)
+    function __construct($y, $m, $firstDay=null)
     {
-        parent::__construct($y);
+        parent::__construct($y, $m, $firstDay);
     }
 
     /**
-     * Builds the Months of the Year.<br>
-     * <b>Note:</b> by defining the constant CALENDAR_MONTH_STATE you can
-     * control what class of Calendar_Month is built e.g.;
-     * <code>
-     * require_once 'Calendar/Calendar_Year.php';
-     * define ('CALENDAR_MONTH_STATE',CALENDAR_USE_MONTH_WEEKDAYS); // Use Calendar_Month_Weekdays
-     * // define ('CALENDAR_MONTH_STATE',CALENDAR_USE_MONTH_WEEKS); // Use Calendar_Month_Weeks
-     * // define ('CALENDAR_MONTH_STATE',CALENDAR_USE_MONTH); // Use Calendar_Month
-     * </code>
-     * It defaults to building Calendar_Month objects.
+     * Builds Calendar_Week objects for the Month. Note that Calendar_Week
+     * builds Calendar_Day object in tabular form (with Calendar_Day->empty)
      *
-     * @param array $sDates   (optional) array of Calendar_Month objects
-     *                        representing selected dates
-     * @param int   $firstDay (optional) first day of week
-     *                        (e.g. 0 for Sunday, 2 for Tuesday etc.)
+     * @param array $sDates (optional) Calendar_Week objects representing selected dates
      *
      * @return boolean
      * @access public
      */
-    function build($sDates = array(), $firstDay = null)
+    function build($sDates = array())
     {
-        include_once CALENDAR_ROOT.'Factory.php';
-        $this->firstDay = $this->defineFirstDayOfWeek($firstDay);
-        $monthsInYear   = $this->cE->getMonthsInYear($this->thisYear());
-        for ($i=1; $i <= $monthsInYear; $i++) {
-            $this->children[$i] = Factory::create('Month', $this->year, $i);
+        $this->tableHelper = new Helper($this, $this->firstDay);
+        include_once CALENDAR_ROOT.'Week.php';
+        $numWeeks = $this->tableHelper->getNumWeeks();
+        for ($i=1, $d=1; $i<=$numWeeks; $i++,
+            $d+=$this->cE->getDaysInWeek(
+                $this->thisYear(),
+                $this->thisMonth(),
+                $this->thisDay()
+            )
+        ) {
+            $this->children[$i] = new Week(
+                $this->year, $this->month, $d, $this->tableHelper->getFirstDay());
         }
+        //used to set empty days
+        $this->children[1]->setFirst(true);
+        $this->children[$numWeeks]->setLast(true);
+
+        // Handle selected weeks here
         if (count($sDates) > 0) {
             $this->setSelection($sDates);
         }
@@ -107,19 +130,20 @@ class Year extends Calendar
     /**
      * Called from build()
      *
-     * @param array $sDates array of Calendar_Month objects representing selected dates
+     * @param array $sDates Calendar_Week objects representing selected dates
      *
      * @return void
      * @access private
      */
-    function setSelection($sDates) 
+    function setSelection($sDates)
     {
         foreach ($sDates as $sDate) {
-            if ($this->year == $sDate->thisYear()) {
-                $key = $sDate->thisMonth();
+            if ($this->year == $sDate->thisYear()
+                && $this->month == $sDate->thisMonth())
+            {
+                $key = $sDate->thisWeek('n_in_month');
                 if (isset($this->children[$key])) {
-                    $sDate->setSelected();
-                    $this->children[$key] = $sDate;
+                    $this->children[$key]->setSelected();
                 }
             }
         }

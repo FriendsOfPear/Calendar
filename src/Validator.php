@@ -35,7 +35,7 @@
  * @version   CVS: $Id$
  * @link      http://pear.php.net/package/Calendar
  */
-namespace Pear\Calendar;
+namespace PEAR\Calendar;
 
 /**
  * Validation Error Messages

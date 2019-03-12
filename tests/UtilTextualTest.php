@@ -1,6 +1,6 @@
 <?php
 
-namespace Pear\Calendar\Test;
+namespace PEAR\Calendar\Test;
 
 require_once 'PEAR/Registry.php';
 require_once 'MockCalendarTestCase.php';

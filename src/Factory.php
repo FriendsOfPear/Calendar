@@ -36,7 +36,7 @@
  * @version   CVS: $Id$
  * @link      http://pear.php.net/package/Calendar
  */
-namespace Pear\Calendar;
+namespace PEAR\Calendar;
 
 /**
  * Contains a factory method to return a Singleton instance of a class

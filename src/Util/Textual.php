@@ -36,7 +36,7 @@
  * @version   CVS: $Id$
  * @link      http://pear.php.net/package/Calendar
  */
-namespace Pear\Calendar\Util;
+namespace PEAR\Calendar\Util;
 
 /**
  * @package Calendar

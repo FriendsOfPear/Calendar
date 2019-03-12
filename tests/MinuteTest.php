@@ -1,9 +1,9 @@
 <?php
 
-namespace Pear\Calendar\Test;
+namespace PEAR\Calendar\Test;
 
-use Pear\Calendar\Minute;
-use Pear\Calendar\Second;
+use PEAR\Calendar\Minute;
+use PEAR\Calendar\Second;
 use PHPUnit_Framework_TestCase;
 
 class MinuteTest extends PHPUnit_Framework_TestCase

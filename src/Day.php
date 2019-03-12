@@ -35,7 +35,7 @@
  * @version   CVS: $Id$
  * @link      http://pear.php.net/package/Calendar
  */
-namespace Pear\Calendar;
+namespace PEAR\Calendar;
 
 /**
  * Allows Calendar include path to be redefined

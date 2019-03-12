@@ -36,9 +36,9 @@
  * @version   CVS: $Id$
  * @link      http://pear.php.net/package/Calendar
  */
-namespace Pear\Calendar\Decorator;
+namespace PEAR\Calendar\Decorator;
 
-use Pear\Calendar\Decorator;
+use PEAR\Calendar\Decorator;
 
 /**
  * Decorator for fetching the day of the week

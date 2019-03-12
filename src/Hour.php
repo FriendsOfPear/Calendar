@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4: */
 
 /**
- * Contains the Calendar_Decorator_Wrapper class
+ * Contains the Calendar_Hour class
  *
  * PHP versions 4 and 5
  *
@@ -30,75 +30,95 @@
  * @category  Date and Time
  * @package   Calendar
  * @author    Harry Fuecks <hfuecks@phppatterns.com>
- * @author    Lorenzo Alberton <l.alberton@quipo.it>
- * @copyright 2003-2007 Harry Fuecks, Lorenzo Alberton
+ * @copyright 2003-2007 Harry Fuecks
  * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
  * @version   CVS: $Id$
  * @link      http://pear.php.net/package/Calendar
  */
-namespace Pear\Calendar\Decorator;
-
-use Pear\Calendar\Decorator;
+namespace PEAR\Calendar;
 
 /**
- * Decorator to help with wrapping built children in another decorator
+ * Represents an Hour and builds Minutes
+ * <code>
+ * require_once 'Calendar'.DIRECTORY_SEPARATOR.'Hour.php';
+ * $Hour = new Calendar_Hour(2003, 10, 21, 15); // Oct 21st 2003, 3pm
+ * $Hour->build(); // Build Calendar_Minute objects
+ * while ($Minute = & $Hour->fetch()) {
+ *     echo $Minute->thisMinute().'<br />';
+ * }
+ * </code>
  *
  * @category  Date and Time
  * @package   Calendar
  * @author    Harry Fuecks <hfuecks@phppatterns.com>
- * @author    Lorenzo Alberton <l.alberton@quipo.it>
- * @copyright 2003-2007 Harry Fuecks, Lorenzo Alberton
+ * @copyright 2003-2007 Harry Fuecks
  * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
  * @link      http://pear.php.net/package/Calendar
  * @access    public
  */
-class Wrapper extends Decorator
+class Hour extends Calendar
 {
     /**
-     * Constructs Calendar_Decorator_Wrapper
+     * Constructs Calendar_Hour
      *
-     * @param object &$Calendar subclass of Calendar
+     * @param int $y year e.g. 2003
+     * @param int $m month e.g. 5
+     * @param int $d day e.g. 11
+     * @param int $h hour e.g. 13
      *
      * @access public
      */
-    function __construct(&$Calendar)
+    function __construct($y, $m, $d, $h)
     {
-        parent::__construct($Calendar);
+        parent::__construct($y, $m, $d, $h);
     }
 
     /**
-     * Wraps objects returned from fetch in the named Decorator class
+     * Builds the Minutes in the Hour
      *
-     * @param string $decorator name of Decorator class to wrap with
+     * @param array $sDates (optional) Calendar_Minute objects representing selected dates
      *
-     * @return object instance of named decorator
+     * @return boolean
      * @access public
      */
-    function & fetch($decorator)
+    function build($sDates = array())
     {
-        $Calendar = parent::fetch();
-        if ($Calendar) {
-            $ret = new $decorator($Calendar);
-        } else {
-            $ret = false;
+        include_once CALENDAR_ROOT.'Minute.php';
+        $mIH = $this->cE->getMinutesInHour($this->year, $this->month, $this->day,
+                           $this->hour);
+        for ($i=0; $i < $mIH; $i++) {
+            $this->children[$i] =
+                new Minute($this->year, $this->month, $this->day,
+                           $this->hour, $i);
         }
-        return $ret;
+        if (count($sDates) > 0) {
+            $this->setSelection($sDates);
+        }
+        return true;
     }
 
     /**
-     * Wraps the returned calendar objects from fetchAll in the named decorator
+     * Called from build()
      *
-     * @param string $decorator name of Decorator class to wrap with
+     * @param array $sDates Calendar_Minute objects representing selected dates
      *
-     * @return array
-     * @access public
+     * @return void
+     * @access private
      */
-    function fetchAll($decorator)
+    function setSelection($sDates)
     {
-        $children = parent::fetchAll();
-        foreach ($children as $key => $Calendar) {
-            $children[$key] = new $decorator($Calendar);
+        foreach ($sDates as $sDate) {
+            if ($this->year == $sDate->thisYear()
+                && $this->month == $sDate->thisMonth()
+                && $this->day == $sDate->thisDay()
+                && $this->hour == $sDate->thisHour())
+            {
+                $key = (int)$sDate->thisMinute();
+                if (isset($this->children[$key])) {
+                    $sDate->setSelected();
+                    $this->children[$key] = $sDate;
+                }
+            }
         }
-        return $children;
     }
 }

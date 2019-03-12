@@ -1,8 +1,8 @@
 <?php
 
-namespace Pear\Calendar\Test;
+namespace PEAR\Calendar\Test;
 
-use Pear\Calendar\Second;
+use PEAR\Calendar\Second;
 use PHPUnit_Framework_TestCase;
 
 class SecondTest extends PHPUnit_Framework_TestCase

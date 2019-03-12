@@ -1,8 +1,8 @@
 <?php
 
-namespace Pear\Calendar\Test;
+namespace PEAR\Calendar\Test;
 
-use Pear\Calendar\Decorator;
+use PEAR\Calendar\Decorator;
 
 require_once 'MockCalendarTestCase.php';
 

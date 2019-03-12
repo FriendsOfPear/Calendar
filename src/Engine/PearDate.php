@@ -35,7 +35,7 @@
  * @version   CVS: $Id$
  * @link      http://pear.php.net/package/Calendar
  */
-namespace Pear\Calendar\Engine;
+namespace PEAR\Calendar\Engine;
 
 /**
  * Performs calendar calculations based on the PEAR::Date class

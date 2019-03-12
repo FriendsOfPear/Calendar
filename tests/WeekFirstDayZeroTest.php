@@ -1,8 +1,8 @@
 <?php
 
-namespace Pear\Calendar\Test;
+namespace PEAR\Calendar\Test;
 
-use Pear\Calendar\Factory;
+use PEAR\Calendar\Factory;
 use PHPUnit_Framework_TestCase;
 
 if (! defined('CALENDAR_FIRST_DAY_OF_WEEK')) {

@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4: */
 
 /**
- * Contains the Calendar_Minute class
+ * Contains the Calendar_Month class
  *
  * PHP versions 4 and 5
  *
@@ -35,16 +35,16 @@
  * @version   CVS: $Id$
  * @link      http://pear.php.net/package/Calendar
  */
-namespace Pear\Calendar;
+namespace PEAR\Calendar;
 
 /**
- * Represents a Minute and builds Seconds
+ * Represents a Month and builds Days
  * <code>
- * require_once 'Calendar'.DIRECTORY_SEPARATOR.'Minute.php';
- * $Minute = new Calendar_Minute(2003, 10, 21, 15, 31); // Oct 21st 2003, 3:31pm
- * $Minute->build(); // Build Calendar_Second objects
- * while ($Second = & $Minute->fetch()) {
- *     echo $Second->thisSecond().'<br />';
+ * require_once 'Calendar/Month.php';
+ * $Month = new Calendar_Month(2003, 10); // Oct 2003
+ * $Month->build(); // Build Calendar_Day objects
+ * while ($Day = & $Month->fetch()) {
+ *     echo $Day->thisDay().'<br />';
  * }
  * </code>
  *
@@ -56,40 +56,38 @@ namespace Pear\Calendar;
  * @link      http://pear.php.net/package/Calendar
  * @access    public
  */
-class Minute extends Calendar
+class Month extends Calendar
 {
     /**
-     * Constructs Minute
+     * Constructs Calendar_Month
      *
-     * @param int $y year e.g. 2003
-     * @param int $m month e.g. 5
-     * @param int $d day e.g. 11
-     * @param int $h hour e.g. 13
-     * @param int $i minute e.g. 31
+     * @param int $y        year e.g. 2003
+     * @param int $m        month e.g. 5
+     * @param int $firstDay first day of the week [optional]
      *
      * @access public
      */
-    function __construct($y, $m, $d, $h, $i)
+    function __construct($y, $m, $firstDay=null)
     {
-        parent::__construct($y, $m, $d, $h, $i);
+        parent::__construct($y, $m);
+        $this->firstDay = $this->defineFirstDayOfWeek($firstDay);
     }
 
     /**
-     * Builds the Calendar_Second objects
+     * Builds Day objects for this Month. Creates as many Calendar_Day objects
+     * as there are days in the month
      *
-     * @param array $sDates (optional) Calendar_Second objects representing selected dates
+     * @param array $sDates (optional) Calendar_Day objects representing selected dates
      *
      * @return boolean
      * @access public
      */
     function build($sDates = array())
     {
-        include_once CALENDAR_ROOT.'Second.php';
-        $sIM = $this->cE->getSecondsInMinute($this->year, $this->month,
-                $this->day, $this->hour, $this->minute);
-        for ($i=0; $i < $sIM; $i++) {
-            $this->children[$i] = new Second($this->year, $this->month,
-                $this->day, $this->hour, $this->minute, $i);
+        include_once CALENDAR_ROOT.'Day.php';
+        $daysInMonth = $this->cE->getDaysInMonth($this->year, $this->month);
+        for ($i=1; $i<=$daysInMonth; $i++) {
+            $this->children[$i] = new Day($this->year, $this->month, $i);
         }
         if (count($sDates) > 0) {
             $this->setSelection($sDates);
@@ -100,7 +98,7 @@ class Minute extends Calendar
     /**
      * Called from build()
      *
-     * @param array $sDates Calendar_Second objects representing selected dates
+     * @param array $sDates Calendar_Day objects representing selected dates
      *
      * @return void
      * @access private
@@ -110,13 +108,15 @@ class Minute extends Calendar
         foreach ($sDates as $sDate) {
             if ($this->year == $sDate->thisYear()
                 && $this->month == $sDate->thisMonth()
-                && $this->day == $sDate->thisDay()
-                && $this->hour == $sDate->thisHour()
-                && $this->minute == $sDate->thisMinute())
-            {
-                $key = (int)$sDate->thisSecond();
+            ) {
+                $key = $sDate->thisDay();
                 if (isset($this->children[$key])) {
                     $sDate->setSelected();
+                    $class = strtolower(get_class($sDate));
+                    if ($class == 'calendar_day' || $class == 'calendar_decorator') {
+                        $sDate->setFirst($this->children[$key]->isFirst());
+                        $sDate->setLast($this->children[$key]->isLast());
+                    }
                     $this->children[$key] = $sDate;
                 }
             }

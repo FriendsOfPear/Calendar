@@ -1,9 +1,9 @@
 <?php
 
-namespace Pear\Calendar\Test;
+namespace PEAR\Calendar\Test;
 
-use Pear\Calendar\Month\Weeks;
-use Pear\Calendar\Week;
+use PEAR\Calendar\Month\Weeks;
+use PEAR\Calendar\Week;
 use PHPUnit_Framework_TestCase;
 
 class MonthWeeksTest extends PHPUnit_Framework_TestCase

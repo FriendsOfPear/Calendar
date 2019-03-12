@@ -1,9 +1,9 @@
 <?php
 
-namespace Pear\Calendar\Test;
+namespace PEAR\Calendar\Test;
 
-use Pear\Calendar\Day;
-use Pear\Calendar\Hour;
+use PEAR\Calendar\Day;
+use PEAR\Calendar\Hour;
 use PHPUnit_Framework_TestCase;
 
 class DayTest extends PHPUnit_Framework_TestCase

@@ -1,9 +1,9 @@
 <?php
 
-namespace Pear\Calendar\Test;
+namespace PEAR\Calendar\Test;
 
-use Pear\Calendar\Day;
-use Pear\Calendar\Month\Weekdays;
+use PEAR\Calendar\Day;
+use PEAR\Calendar\Month\Weekdays;
 use PHPUnit_Framework_TestCase;
 
 class MonthWeekdaysTest extends PHPUnit_Framework_TestCase

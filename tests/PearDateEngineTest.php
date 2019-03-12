@@ -1,8 +1,8 @@
 <?php
 
-namespace Pear\Calendar\Test;
+namespace PEAR\Calendar\Test;
 
-use Pear\Calendar\Engine\PearDate;
+use PEAR\Calendar\Engine\PearDate;
 use PHPUnit_Framework_TestCase;
 
 class PearDateEngineTest extends PHPUnit_Framework_TestCase

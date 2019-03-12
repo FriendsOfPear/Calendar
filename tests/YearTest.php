@@ -1,9 +1,9 @@
 <?php
 
-namespace Pear\Calendar\Test;
+namespace PEAR\Calendar\Test;
 
-use Pear\Calendar\Month;
-use Pear\Calendar\Year;
+use PEAR\Calendar\Month;
+use PEAR\Calendar\Year;
 use PHPUnit_Framework_TestCase;
 
 class YearTest extends PHPUnit_Framework_TestCase
