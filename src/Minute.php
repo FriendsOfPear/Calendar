@@ -83,7 +83,6 @@ class Minute extends Calendar
      */
     function build($sDates = array())
     {
-        include_once CALENDAR_ROOT.'Second.php';
         $sIM = $this->cE->getSecondsInMinute($this->year, $this->month,
                 $this->day, $this->hour, $this->minute);
         for ($i=0; $i < $sIM; $i++) {
